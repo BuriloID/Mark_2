@@ -1,0 +1,204 @@
+body { font-family: Arial, sans-serif; margin:0; padding:0; background: #f7f7f7; }
+header {
+    background: #222;
+    color: #fff;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 72px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #fff;
+    text-decoration: none;
+}
+.logo img {
+    width: 44px;
+    height: 44px;
+    margin-right: 10px;
+}
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+nav ul li {
+    position: relative;
+}
+nav ul li a, nav ul li button {
+    color: #fff;
+    background: none;
+    border: none;
+    text-decoration: none;
+    padding: 18px 18px;
+    font-size: 1.05em;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+nav ul li a:hover, nav ul li button:hover {
+    background: #2e2e2e;
+}
+/* Dropdown */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background: #fff;
+    min-width: 220px;
+    z-index: 999;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+}
+.dropdown-content a {
+    color: #222;
+    padding: 14px 22px;
+    text-decoration: none;
+    display: block;
+    background: #fff;
+    font-size: 1em;
+    transition: background 0.16s;
+}
+.dropdown-content a:hover {
+    background: #f2f2f2;
+}
+.menu-dropdown:hover .dropdown-content {
+    display: block;
+}
+/* Footer */
+footer {
+    background: #222;
+    color: #aaa;
+    text-align: center;
+    padding: 18px 0 12px 0;
+    font-size: 1em;
+    margin-top: 60px;
+}
+@media (max-width: 800px) {
+    .navbar { flex-direction: column; height: auto; padding: 0 10px; }
+    nav ul { flex-wrap: wrap; }
+    nav ul li a, nav ul li button { padding: 14px 10px; }
+}
+.slider-container {
+    position: relative;
+    max-width: 980px;
+    margin: 36px auto 0 auto;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.11);
+    background: #fff;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(.86,0,.07,1);
+    height: 340px;
+}
+
+.slide {
+    min-width: 100%;
+    height: 340px;
+    background-size: cover;
+    background-position: center;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.slide.active {
+    display: flex;
+}
+
+.slide-content {
+    background: rgba(36,36,36,0.64);
+    color: #fff;
+    border-radius: 12px;
+    padding: 36px 32px;
+    margin-left: 60px;
+    box-shadow: 0 2px 18px rgba(0,0,0,0.16);
+    max-width: 380px;
+}
+.slide-content h2 {
+    margin: 0 0 16px 0;
+    font-size: 2em;
+    font-weight: 700;
+}
+.slide-content p {
+    font-size: 1.15em;
+    margin-bottom: 18px;
+}
+.slider-btn {
+    display: inline-block;
+    background: #ffdd2d;
+    color: #23232e;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background .17s, color .17s;
+}
+.slider-btn:hover {
+    background: #23232e;
+    color: #ffdd2d;
+}
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(34,34,34,0.66);
+    color: #fff;
+    border: none;
+    font-size: 2.2em;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.18s;
+}
+.slider-arrow.left { left: 20px; }
+.slider-arrow.right { right: 20px; }
+.slider-arrow:hover {
+    background: #ffdd2d;
+    color: #23232e;
+}
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+.slider-dot {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin: 0 7px;
+    border-radius: 50%;
+    background: #bbb;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.slider-dot.active {
+    background: #ffdd2d;
+}
+@media (max-width: 900px) {
+    .slider-container { max-width: 99vw; }
+    .slider, .slide { height: 210px; }
+    .slide-content { margin-left: 15px; padding: 18px 12px; max-width: 98vw; }
+    .slide-content h2 { font-size: 1.3em; }
+}

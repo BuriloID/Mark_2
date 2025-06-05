@@ -1,0 +1,33 @@
+{% extends "main/base.html" %}
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div class="slider-container">
+    <div class="slider" id="slider">
+        <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=900&q=80')">
+            <div class="slide-content">
+                <h2>Кухни на заказ</h2>
+                <p>Идеальный дизайн и комфорт для вашего дома</p>
+                <a href="#" class="slider-btn">В каталог кухонь</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80')">
+            <div class="slide-content">
+                <h2>Гардеробные и шкафы</h2>
+                <p>Эргономика пространства и стиль</p>
+                <a href="#" class="slider-btn">Гардеробные</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=900&q=80')">
+            <div class="slide-content">
+                <h2>Фасады любой сложности</h2>
+                <p>Современные материалы и технологии</p>
+                <a href="#" class="slider-btn">Выбрать фасад</a>
+            </div>
+        </div>
+    </div>
+    <button class="slider-arrow left" onclick="plusSlide(-1)">&#10094;</button>
+    <button class="slider-arrow right" onclick="plusSlide(1)">&#10095;</button>
+    <div class="slider-dots" id="slider-dots"></div>
+</div>
+{% endblock %}

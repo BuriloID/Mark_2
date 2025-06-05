@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Главная{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/styles.css' %}">
+</head>
+<body>
+<header class="site-header">
+    <div class="navbar">
+        <a href="/" class="logo">
+            <img src="{% static 'main/logo.svg' %}" alt="FacadeArt" />
+            <span>FacadeArt</span>
+        </a>
+        <nav>
+            <ul class="nav-menu">
+                <li class="menu-dropdown">
+                    <button class="dropdown-btn">Каталог <span class="arrow">&#9662;</span></button>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Кухни</a></li>
+                        <li><a href="#">Гардеробные</a></li>
+                        <li><a href="#">Фасады</a></li>
+                        <li><a href="#">Дополнительные элементы</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Доставка и оплата</a></li>
+                <li><a href="#">Портфолио</a></li>
+                <li><a href="#">Акции</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    {% block content %}{% endblock %}
+</main>
+<footer>
+    &copy; 2025 FacadeArt — фасады, кухни и гардеробные на заказ
+</footer>
+<script src="{% static 'main/script.js' %}"></script>
+</body>
+</html>
