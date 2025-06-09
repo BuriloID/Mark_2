@@ -2,14 +2,14 @@ let slideIndex = 0;
 let sliderInterval;
 const slides = document.getElementsByClassName('slide');
 const dotsContainer = document.getElementById('slider-dots');
+const slider = document.querySelector('.slider');
 
 function showSlide(n) {
     if (!slides.length) return;
     slideIndex = (n + slides.length) % slides.length;
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.toggle('active', i === slideIndex);
+    if (slider) {
+        slider.style.transform = `translateX(-${slideIndex * 100}vw)`;
     }
-    // Dots
     if (dotsContainer) {
         dotsContainer.innerHTML = '';
         for (let i = 0; i < slides.length; i++) {
@@ -35,4 +35,8 @@ function resetSliderInterval() {
 document.addEventListener('DOMContentLoaded', function() {
     showSlide(slideIndex);
     sliderInterval = setInterval(autoSlide, 6000);
+    const left = document.querySelector('.slider-arrow.left');
+    const right = document.querySelector('.slider-arrow.right');
+    if (left) left.onclick = () => plusSlide(-1);
+    if (right) right.onclick = () => plusSlide(1);
 });

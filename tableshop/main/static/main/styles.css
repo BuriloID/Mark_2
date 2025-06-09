@@ -4,35 +4,47 @@ header {
     color: #fff;
     padding: 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    position: relative;
+    z-index: 20; 
 }
 .navbar {
     display: flex;
-    align-items: center;
+    align-items: center;         
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px;
     height: 72px;
+    min-height: 72px;            
+    position: relative;
+    z-index: 1002; 
 }
+
 .logo {
     display: flex;
-    align-items: center;
+    align-items: center;         
     font-size: 1.4em;
     font-weight: bold;
     letter-spacing: 2px;
     color: #fff;
     text-decoration: none;
+    line-height: 1;              
 }
+
 .logo img {
     width: 44px;
     height: 44px;
     margin-right: 10px;
+    display: block;              
+    object-fit: contain;         
 }
 nav ul {
     display: flex;
+    align-items: center;        
     list-style: none;
     margin: 0;
     padding: 0;
+    height: 44px;                
 }
 nav ul li {
     position: relative;
@@ -50,33 +62,51 @@ nav ul li a, nav ul li button {
 nav ul li a:hover, nav ul li button:hover {
     background: #2e2e2e;
 }
-/* Dropdown */
-.dropdown-content {
+.menu-dropdown {
+    position: relative;
+}
+.menu-dropdown .dropdown-content {
     display: none;
     position: absolute;
     left: 0;
     top: 100%;
     background: #fff;
     min-width: 220px;
-    z-index: 999;
+    z-index: 1001;
     box-shadow: 0 4px 16px rgba(0,0,0,0.16);
     border-radius: 0 0 8px 8px;
-    overflow: hidden;
+    padding: 0;
+    flex-direction: column;
+    overflow: visible;
 }
-.dropdown-content a {
+.menu-dropdown:hover .dropdown-content,
+.menu-dropdown:focus-within .dropdown-content {
+    display: flex;
+}
+.menu-dropdown .dropdown-content li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.menu-dropdown .dropdown-content a {
     color: #222;
     padding: 14px 22px;
     text-decoration: none;
     display: block;
     background: #fff;
     font-size: 1em;
-    transition: background 0.16s;
+    transition: background 0.16s, color 0.16s;
+    width: 100%;
+    box-sizing: border-box;
 }
-.dropdown-content a:hover {
+.menu-dropdown .dropdown-content a:hover {
     background: #f2f2f2;
+    color: #191b1e;
 }
-.menu-dropdown:hover .dropdown-content {
-    display: block;
+.menu-dropdown .arrow {
+    font-size: 0.7em;
+    margin-left: 4px;
 }
 /* Footer */
 footer {
@@ -94,42 +124,53 @@ footer {
 }
 .slider-container {
     position: relative;
-    max-width: 980px;
-    margin: 36px auto 0 auto;
-    overflow: hidden;
-    border-radius: 16px;
+    width: 100vw;             
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;       
+    margin-right: -50vw;
+    border-radius: 0;         
     box-shadow: 0 6px 32px rgba(0,0,0,0.11);
     background: #fff;
+    max-width: none;          
+    z-index: 1;               
 }
 
 .slider {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(.86,0,.07,1);
-    height: 340px;
+    position: relative;
+    width: 100vw;
+    height: 550px;
+    overflow: hidden;
 }
-
 .slide {
     min-width: 100%;
-    height: 340px;
+    height: 100%;
     background-size: cover;
     background-position: center;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    display: flex;
+    align-items: flex-end; 
+    justify-content: flex-start; 
+    position: absolute;
+    left: 0; top: 0;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    z-index: 0;
+    pointer-events: none;
 }
 .slide.active {
-    display: flex;
+    opacity: 1;
+    z-index: 1;
+    pointer-events: auto;
 }
-
 .slide-content {
-    background: rgba(36,36,36,0.64);
+    background: none;
     color: #fff;
-    border-radius: 12px;
-    padding: 36px 32px;
-    margin-left: 60px;
-    box-shadow: 0 2px 18px rgba(0,0,0,0.16);
-    max-width: 380px;
+    border-radius: 0;
+    padding: 24px 32px 32px 32px;
+    margin: 0 0 30px 30px;
+    box-shadow: none;
+    max-width: 400px;
+    position: static;
 }
 .slide-content h2 {
     margin: 0 0 16px 0;
@@ -177,6 +218,7 @@ footer {
     color: #23232e;
 }
 .slider-dots {
+    z-index: 22;
     position: absolute;
     bottom: 20px;
     width: 100%;
@@ -201,4 +243,141 @@ footer {
     .slider, .slide { height: 210px; }
     .slide-content { margin-left: 15px; padding: 18px 12px; max-width: 98vw; }
     .slide-content h2 { font-size: 1.3em; }
+}
+/* --- Футер из задачи выше --- */
+.site-footer {
+    background: #191b1e;
+    color: #fff;
+    padding: 40px 0 20px 0;
+    position: relative;
+    margin-top: 60px;
+    font-family: inherit;
+}
+.site-footer .footer-menu {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.site-footer .nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+}
+.site-footer .nav-menu > li {
+    position: relative;
+}
+.site-footer .nav-menu a,
+.site-footer .nav-menu .dropdown-btn,
+.site-footer .nav-menu .dropdown-btn:visited {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.2s;
+}
+.site-footer .nav-menu a:hover,
+.site-footer .nav-menu .dropdown-btn:hover {
+    color: #e7b87e;
+}
+.site-footer .dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 32px;
+    background: #23252a;
+    border-radius: 8px;
+    min-width: 160px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+    z-index: 100;
+    flex-direction: column;
+    padding: 0;
+}
+.site-footer .menu-dropdown:hover .dropdown-content,
+.site-footer .menu-dropdown:focus-within .dropdown-content {
+    display: flex;
+}
+.site-footer .dropdown-content li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.site-footer .dropdown-content li a {
+    padding: 10px 20px;
+    display: block;
+    color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+.site-footer .dropdown-content li a:hover {
+    background: #2c2e32;
+}
+.footer-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    margin-top: 15px;
+    position: relative;
+}
+.social-icons {
+    display: flex;
+    gap: 22px;
+    font-size: 2em;
+}
+.social-icons a {
+    color: #fff;
+    transition: color 0.2s, transform 0.2s;
+}
+.social-icons a:hover {
+    color: #e7b87e;
+    transform: scale(1.17);
+}
+.chat-icon {
+    display: none;
+    font-size: 2em;
+    color: #fff;
+    cursor: pointer;
+}
+@media (max-width: 600px) {
+    .site-footer .footer-menu {
+        margin-bottom: 18px;
+    }
+    .site-footer .nav-menu {
+        flex-direction: column;
+        gap: 14px;
+        align-items: center;
+    }
+    .footer-social {
+        justify-content: flex-end;
+        gap: 0;
+    }
+    .social-icons {
+        display: none;
+        position: absolute;
+        right: 56px;
+        bottom: 0;
+        background: #23252a;
+        padding: 8px 16px;
+        border-radius: 30px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.14);
+        z-index: 50;
+    }
+    .social-icons.active {
+        display: flex;
+        flex-direction: row;
+        animation: fadeIn 0.25s;
+    }
+    .chat-icon {
+        display: block;
+        position: relative;
+        z-index: 51;
+        margin-left: 10px;
+    }
+}
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
 }
