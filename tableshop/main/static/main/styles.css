@@ -332,7 +332,6 @@
 .site-footer a:visited {
     color: #fff !important;
 }
-
 /* Соц. иконки внизу справа */
 .footer-social {
     position: absolute;
@@ -366,29 +365,20 @@
   transform: scale(1.17) rotate(-6deg);
 }
 .social-icons a i {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;   
   font-size: 1em;
-  line-height: 1;
+  line-height: 1;          
   height: 1em;
   width: 1em;
   margin: 0;
   padding: 0;
+  vertical-align: middle;  
 }
 .social-icons a i::before {
-  display: block;
+  display: inline-block;  
   line-height: 1;
-  align-items: center;
-  justify-content: center;
+  vertical-align: middle;
 }
-.chat-icon {
-    display: none;
-    font-size: 2em;
-    color: #fff;
-    cursor: pointer;
-}
-
 @media (max-width: 1000px) {
     .site-footer .footer-nav {
         gap: 16px;
