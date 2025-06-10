@@ -366,6 +366,7 @@
 }
 .social-icons a i {
   display: inline-block;   
+   color: inherit !important;
   font-size: 1em;
   line-height: 1;          
   height: 1em;
@@ -375,6 +376,7 @@
   vertical-align: middle;  
 }
 .social-icons a i::before {
+     color: inherit !important;
   display: inline-block;  
   line-height: 1;
   vertical-align: middle;
