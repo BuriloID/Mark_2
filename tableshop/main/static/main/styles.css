@@ -690,3 +690,65 @@
         padding: 14px 8px 12px 16px;
     }
 }
+.contacts-hero {
+    padding: 32px 0 0 0;
+    background: linear-gradient(180deg, #fafbfc 70%, #fff 100%);
+}
+.contacts-breadcrumbs {
+    color: #8b8b8b;
+    font-size: 1em;
+    margin-bottom: 16px;
+    margin-left: 12px;
+    letter-spacing: 0.03em;
+}
+.contacts-breadcrumbs-home {
+    color: #8b8b8b;
+    text-decoration: none;
+    font-weight: 500;
+}
+.contacts-breadcrumbs-sep {
+    margin: 0 8px;
+}
+.contacts-title {
+    font-size: 2.7em;
+    font-weight: 500;
+    margin-left: 12px;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    color: #222;
+}
+.contacts-data-grid {
+    display: flex;
+    max-width: 1200px;
+    margin: 32px 0 0 48px; /* отступ слева 48px */
+    gap: 120px;
+    justify-content: flex-start; /* по левому краю */
+    align-items: flex-start;
+    font-size: 1.13em;
+}
+
+.contacts-data-col {
+    min-width: 280px;
+}
+
+.contacts-phone {
+    color: inherit; /* убирает зелёный цвет */
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.contacts-mail {
+    color: #45b;
+    text-decoration: none;
+}
+.contacts-mail:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .contacts-data-grid {
+        flex-direction: column;
+        gap: 24px;
+        margin-left: 16px;
+    }
+}

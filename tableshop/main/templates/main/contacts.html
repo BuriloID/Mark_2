@@ -1,0 +1,33 @@
+{% extends "main/base.html" %}
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
+<div class="contacts-hero">
+    <div class="contacts-breadcrumbs">
+        <a href="/" class="contacts-breadcrumbs-home">Premier Fasad</a>
+        <span class="contacts-breadcrumbs-sep">/</span>
+        <span>Контакты</span>
+    </div>
+    <h1 class="contacts-title">Контакты</h1>
+</div>
+<div style="position:relative;overflow:hidden;text-align: center;" >
+  <a href="https://yandex.ru/maps/21630/lytkarino/?utm_medium=mapframe&utm_source=maps"
+     style="color:#eee;font-size:12px;position:absolute;top:0px;">Лыткарино</a>
+  <a href="https://yandex.ru/maps/21630/lytkarino/?from=mapframe&ll=37.929252%2C55.562704&mode=usermaps&source=mapframe&um=constructor%3A901e3b053a0dd9e6c19131a080630d92d76343af0d4efdfefbcdb237ebbeb333&utm_medium=mapframe&utm_source=maps&z=15"
+     style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс Карты — транспорт, навигация, поиск мест</a>
+  <iframe src="https://yandex.ru/map-widget/v1/?from=mapframe&ll=37.929252%2C55.562704&mode=usermaps&source=mapframe&um=constructor%3A901e3b053a0dd9e6c19131a080630d92d76343af0d4efdfefbcdb237ebbeb333&utm_source=mapframe&z=15"
+          width="95%" height="500" frameborder="1" allowfullscreen="true" style="position:relative;border-radius:12px;"></iframe>
+</div>
+<div class="contacts-data-grid">
+    <div class="contacts-data-col">
+        <b>Адрес:</b><br>
+        территория промзона Тураево, с35,<br>
+        Лыткарино, Московская область, 140080
+    </div>
+    <div class="contacts-data-col">
+        <b>Контакты:</b><br>
+        <span class="contacts-phone">тел.: +7 965-131-00-56</span><br>
+        <a class="contacts-mail" href="mailto:admin@premier-fasad.ru">admin@premier-fasad.ru</a>
+    </div>
+</div>
+{% endblock %}
