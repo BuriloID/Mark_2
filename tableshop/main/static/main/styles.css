@@ -1,4 +1,5 @@
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background: #f7f7f7;}
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background: #f7f7f7;
+            font-family: 'Inter', Arial, sans-serif;}
     header {
         background: #222;
         color: #fff;
@@ -544,4 +545,148 @@
     color: #23232e;
     box-shadow: 0 8px 28px rgba(231,184,126,0.18);
     transform: scale(1.1);
+}
+.kitchen-types-section {
+    margin: 32px 0 0 0;
+    padding: 0 0 32px 0;
+}
+
+.kitchen-types-header{
+    max-width: 1200px;       
+    margin-left: 40px;       
+    margin-right: auto;     
+}
+
+.kitchen-types-category {
+    display: block;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 14px;
+    letter-spacing: 0.03em;
+    color: #23232e;
+}
+
+.kitchen-types-title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 2.8em;
+    font-weight: 700;
+    margin-bottom: 22px;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+}
+
+.kitchen-types-desc {
+    font-size: 1.25em;
+    color: #444;
+    margin-bottom: 22px;
+    max-width: 810px;
+}
+
+.kitchen-types-cards {
+    display: flex;
+    gap: 36px;
+    margin: 40px;
+    margin-top: 32px;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.kitchen-type-card {
+    position: relative;
+    flex: 1 1 49%;
+    min-width: 340px;
+    min-height: 340px;
+    max-width: 820px;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    text-decoration: none;
+    color: #fff;
+    box-shadow: 0 4px 36px rgba(0,0,0,0.13);
+    transition: transform 0.28s, box-shadow 0.28s;
+    margin-bottom: 16px;
+}
+
+.kitchen-type-card:hover {
+    transform: scale(1.028) translateY(-4px);
+    box-shadow: 0 10px 44px rgba(0,0,0,0.19);
+}
+
+.kitchen-type-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    transition: transform 0.3s;
+}
+
+.kitchen-type-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,rgba(0,0,0,0.14) 0%,rgba(0,0,0,0.28) 100%);
+    z-index: 2;
+}
+
+.kitchen-type-content {
+    position: relative;
+    z-index: 3;
+    padding: 38px 38px 36px 38px;
+    width: 100%;
+    text-align: left;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+.kitchen-type-content h2 {
+    font-size: 2.2em;
+    font-weight: 500;
+    margin-bottom: 18px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    letter-spacing: -0.01em;
+}
+
+.kitchen-type-content p {
+    font-size: 1.22em;
+    line-height: 1.35;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.15);
+}
+
+/* Адаптив */
+@media (max-width: 1100px) {
+    .kitchen-types-header {
+        max-width: 98vw;
+    }
+    .kitchen-types-title {
+        font-size: 2.0em;
+    }
+    .kitchen-types-cards {
+        gap: 16px;
+    }
+    .kitchen-type-card {
+        min-height: 220px;
+        padding: 0;
+    }
+    .kitchen-type-content {
+        padding: 18px 14px 18px 18px;
+    }
+}
+@media (max-width: 800px) {
+    .kitchen-types-section {
+        padding: 0 4vw 36px 4vw;
+    }
+    .kitchen-types-cards {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .kitchen-type-card {
+        min-width: 0;
+        width: 100%;
+        min-height: 160px;
+        max-width: 100vw;
+        margin-bottom: 12px;
+    }
+    .kitchen-type-content {
+        padding: 14px 8px 12px 16px;
+    }
 }
