@@ -20,6 +20,19 @@ function showSlide(n) {
         }
     }
 }
+window.onscroll = function() { scrollFunction(); };
+function scrollFunction() {
+    const btn = document.getElementById("scrollTopBtn");
+    if (!btn) return;
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "block";
+    } else {
+        btn.style.display = "none";
+    }
+}
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 function plusSlide(n) {
     showSlide(slideIndex + n);
     resetSliderInterval();
@@ -40,3 +53,4 @@ document.addEventListener('DOMContentLoaded', function() {
     if (left) left.onclick = () => plusSlide(-1);
     if (right) right.onclick = () => plusSlide(1);
 });
+console.log('main/script.js loaded');
