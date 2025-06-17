@@ -522,11 +522,37 @@
         from {opacity: 0; transform: translateY(10px);}
         to {opacity: 1; transform: translateY(0);}
     }
+    .popup-fab {
+  position: fixed;
+  bottom: 78px;
+  right: 40px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #23232e;
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 16px rgba(34, 97, 14, 0.18);
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.18s;
+}
+.popup-fab:hover {
+  background: #e7b87e;
+  color: #23232e;
+    box-shadow: 0 8px 28px rgba(231,184,126,0.18);
+    transform: scale(1.1);
+}
+
 #scrollTopBtn {
     display: none;
     position: fixed;
-    right: 32px;
-    bottom: 78px;
+    right: 40px;
+    bottom: 145px;
     z-index: 99;
     background: #23232e;
     color: #fff;

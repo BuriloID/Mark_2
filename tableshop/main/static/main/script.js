@@ -57,7 +57,10 @@ console.log('main/script.js loaded');
 let popupTimeout = setTimeout(() => {
   document.getElementById('callback-popup').style.display = 'flex';
 }, 45000);
-
+function openPopup() {
+  document.getElementById('callback-popup').style.display = 'flex';
+  clearTimeout(popupTimeout); 
+}
 function closePopup() {
   document.getElementById('callback-popup').style.display = 'none';
   clearTimeout(popupTimeout);
