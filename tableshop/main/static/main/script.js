@@ -54,3 +54,26 @@ document.addEventListener('DOMContentLoaded', function() {
     if (right) right.onclick = () => plusSlide(1);
 });
 console.log('main/script.js loaded');
+let popupTimeout = setTimeout(() => {
+  document.getElementById('callback-popup').style.display = 'flex';
+}, 45000);
+
+function closePopup() {
+  document.getElementById('callback-popup').style.display = 'none';
+  clearTimeout(popupTimeout);
+}
+
+function sendWhatsApp(event) {
+  event.preventDefault();
+  const day = document.getElementById('day').value;
+  const time = document.getElementById('time').value;
+  const phone = document.getElementById('phone').value;
+
+  const sellerPhone = '79539676218';
+  const msg = encodeURIComponent(
+    `Здравствуйте! Прошу перезвонить мне в ${day} в ${time}, мой номер: ${phone}`
+  );
+  const waLink = `https://wa.me/${sellerPhone}?text=${msg}`;
+  window.open(waLink, '_blank');
+  closePopup();
+}

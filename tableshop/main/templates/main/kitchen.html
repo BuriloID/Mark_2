@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+  <nav class="kitchen-nav" id="kitchenNav">
+    <ul>
+      <li class="active"><a href="#">Кухни</a></li>
+      <li><a href="#">Гардеробные</a></li>
+      <li><a href="#">Фасады</a></li>
+      <li><a href="#">Дополнительные элементы</a></li>
+    </ul>
+  </nav>
+  <section class="kitchen-hero">
+    <div class="kitchen-hero-bg"></div>
+    <div class="kitchen-hero-content">
+      <h1>Кухня</h1>
+      <p>
+        Ключевые особенности кухни – хороший дизайн и функциональность.<br>
+        Помня об этом, представляем вам избранные проекты типовых кухонь, в которых<br>
+        каждый найдёт <b>КУХНИ ДЛЯ СЕБЯ!</b>
+      </p>
+    </div>
+  </section>
+  {% endblock %}

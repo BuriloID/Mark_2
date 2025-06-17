@@ -2,6 +2,33 @@
 {% block title %}Главная страница{% endblock %}
 
 {% block content %}
+<div id="callback-popup" class="popup-overlay" style="display:none;">
+  <div class="popup">
+    <button type="button" class="close-btn" onclick="closePopup()" aria-label="Закрыть">×</button>
+    <img src="logo.png" alt="Премьер фасад" class="popup-logo">
+    <div class="popup-content">
+      <h3>Здравствуйте! Оставьте номер, и мы вам перезвоним!</h3>
+      <form id="callback-form" onsubmit="sendWhatsApp(event)">
+        <select id="day" required>
+          <option value="" disabled selected>Выберите день</option>
+          <option>Понедельник</option>
+          <option>Вторник</option>
+          <option>Среда</option>
+          <option>Четверг</option>
+          <option>Пятница</option>
+          <option>Суббота</option>
+          <option>Воскресенье</option>
+        </select>
+        <input type="time" id="time" required placeholder="Время">
+        <input type="tel" id="phone" placeholder="Телефон" required>
+        <button type="submit" class="green-btn">Жду звонка!</button>
+        <p class="agreement">
+          Нажимая на кнопку "Жду звонка!", я даю свое согласие на обработку персональных данных и принимаю <a href="#" target="_blank">условия соглашения</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
 <div class="slider-container">
     <div class="slider" id="slider">
         <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=900&q=80')">
@@ -40,7 +67,7 @@
             </div>
             <div class="assortment-name">Гардеробные</div>
         </a>
-        <a href=# class="assortment-item">
+        <a href="{% url 'kitchen' %}" class="assortment-item">
             <div class="assortment-icon">
                 <!-- SVG-иконка кухни -->
                 <svg width="64" height="64" viewBox="0 0 64 64"><rect x="10" y="38" width="44" height="16" fill="none" stroke="#444" stroke-width="2"/><rect x="34" y="10" width="20" height="18" fill="none" stroke="#444" stroke-width="2"/><circle cx="20" cy="46" r="2" fill="#444"/></svg>
@@ -58,7 +85,6 @@
     <a href=# class="assortment-extra">
         <div class="assortment-extra-content">
             <div class="assortment-extra-icon">
-                <!-- SVG-иконка дополнительных элементов -->
                 <svg width="64" height="64" viewBox="0 0 64 64"><rect x="14" y="42" width="36" height="8" fill="none" stroke="#444" stroke-width="2"/><rect x="32" y="14" width="8" height="36" fill="none" stroke="#444" stroke-width="2"/></svg>
             </div>
             <div class="assortment-extra-name">Дополнительные элементы</div>
