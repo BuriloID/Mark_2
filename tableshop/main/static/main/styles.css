@@ -885,7 +885,7 @@
   .kitchen-nav li { margin: 0 10px; }
   .kitchen-nav a { font-size: 17px; }
 }
-.kitchen-hero {
+.cat-hero {
   position: relative;
   width: 92vw;
   max-width: 1700px;
@@ -897,14 +897,14 @@
   background: #fff; /* fallback, если нет картинки */
 }
 
-.kitchen-hero-bg {
+.cat-hero-bg {
   background: url('/static/img/kitchen-bg.jpg') center center/cover no-repeat;
   width: 100%;
   height: 350px;
   filter: brightness(0.97) blur(1.5px);
 }
 
-.kitchen-hero-content {
+.cat-hero-content {
   position: absolute;
   width: 100%;
   top: 52%; left: 0;
@@ -915,14 +915,14 @@
   z-index: 2;
 }
 
-.kitchen-hero-content h1 {
+.cat-hero-content h1 {
   font-size: 48px;
   margin: 0 0 17px 0;
   font-weight: 500;
   letter-spacing: 1px;
 }
 
-.kitchen-hero-content p {
+.cat-hero-content p {
   font-size: 20px;
   margin: 0;
   font-weight: 300;
@@ -930,7 +930,7 @@
 }
 
 @media (max-width: 900px) {
-  .kitchen-hero, .kitchen-hero-bg { min-height: 200px; height: 200px;}
-  .kitchen-hero-content h1 { font-size: 26px; }
-  .kitchen-hero-content p { font-size: 12px; }
+  .cat-hero, .cat-hero-bg { min-height: 200px; height: 200px;}
+  .cat-hero-content h1 { font-size: 26px; }
+  .cat-hero-content p { font-size: 12px; }
 }

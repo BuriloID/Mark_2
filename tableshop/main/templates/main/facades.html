@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% block title %}Мебельные фасады{% endblock %}
+
+{% block content %}
+  <nav class="kitchen-nav" id="kitchenNav">
+    <ul>
+      <li><a href="{% url 'kitchen' %}">Кухни</a></li>
+      <li><a href=#>Гардеробные</a></li>
+      <li class="active"><a href="{% url 'facades' %}">Фасады</a></li>
+      <li><a href=#>Дополнительные элементы</a></li>
+    </ul>
+  </nav>
+  <section class="cat-hero">
+    <div class="cat-hero-bg"></div>
+    <div class="cat-hero-content">
+      <h1>Мебельные фасады</h1>
+      <p>
+        Натуральные оттенки, экологичные материалы, современные технологии.<br>
+        Мы соединяем эти элементы, чтобы вы почувствовали в своем интерьере наши<br>
+        источники вдохновения для создания <b>ИДЕАЛЬНОЙ КУХНИ.</b>
+      </p>
+    </div>
+  </section>
+{% endblock %}

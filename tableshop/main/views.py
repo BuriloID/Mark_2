@@ -6,3 +6,5 @@ def contacts(request):
     return render(request, "main/contacts.html")
 def kitchen(request):
     return render(request, 'main/kitchen.html')
+def facades(request):
+    return render(request, 'main/facades.html')
