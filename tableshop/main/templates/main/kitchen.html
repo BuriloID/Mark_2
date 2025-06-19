@@ -21,4 +21,22 @@
       </p>
     </div>
   </section>
+ <section class="kitchen-list-section">
+    <div class="kitchen-list">
+      {% for kitchen in kitchens %}
+        <div class="kitchen-card">
+          <div class="kitchen-card-image-wrapper">
+            {% if kitchen.facade_image %}
+              <a class="kitchen-card-image-link" href="{% url 'kitchen_detail' kitchen.id %}">
+                <img src="{{ kitchen.facade_image }}" alt="Кухня {{ kitchen.name }}">
+              </a>
+            {% else %}
+              <div class="no-photo">Нет фото</div>
+            {% endif %}
+          </div>
+          <div class="kitchen-title">№ {{ kitchen.name }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
   {% endblock %}

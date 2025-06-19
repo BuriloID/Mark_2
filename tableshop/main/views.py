@@ -1,10 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Kitchen
 
 def index(request):
     return render(request, "main/index.html")
 def contacts(request):
     return render(request, "main/contacts.html")
 def kitchen(request):
-    return render(request, 'main/kitchen.html')
+    kitchens = Kitchen.objects.all()
+    return render(request, 'main/kitchen.html', {'kitchens': kitchens})
 def facades(request):
     return render(request, 'main/facades.html')
+def kitchen_detail(request, pk):
+    kitchen = get_object_or_404(Kitchen, pk=pk)
+    return render(request, 'main/kitchen_detail.html', {'kitchen': kitchen})
