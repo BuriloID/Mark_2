@@ -39,14 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
 ]
+import os
+
 INSTALLED_APPS += ["storages"]
-
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
 AWS_S3_ENDPOINT_URL = "https://storage.yandexcloud.net"
-AWS_ACCESS_KEY_ID = "YCAJEQW_f64I-ZhI_tvMy8JMW"
-AWS_SECRET_ACCESS_KEY = "YCO_x4MAFA4-4Tm5Y6OrXTnUs4s_dtSLC0GCE068"
-AWS_STORAGE_BUCKET_NAME = "kitchen-images"  # название вашего бакета
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = "kitchen-images"
 AWS_S3_REGION_NAME = "ru-central1"
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
