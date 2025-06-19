@@ -52,6 +52,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const right = document.querySelector('.slider-arrow.right');
     if (left) left.onclick = () => plusSlide(-1);
     if (right) right.onclick = () => plusSlide(1);
+    const kitchenImages = window.kitchenImages || [];
+    let kitchenImgIndex = 0;
+    const mainImg = document.getElementById('kitchen-main-img');
+    const leftBtn = document.querySelector('.img-nav-left');
+    const rightBtn = document.querySelector('.img-nav-right');
+    if (mainImg && kitchenImages.length) {
+        function showKitchenImg(idx) {
+            kitchenImgIndex = (idx + kitchenImages.length) % kitchenImages.length;
+            mainImg.src = kitchenImages[kitchenImgIndex];
+        }
+        if (leftBtn) leftBtn.onclick = function() { showKitchenImg(kitchenImgIndex - 1); };
+        if (rightBtn) rightBtn.onclick = function() { showKitchenImg(kitchenImgIndex + 1); };
+        mainImg.addEventListener('click', () => showKitchenImg(kitchenImgIndex + 1));}
 });
 console.log('main/script.js loaded');
 let popupTimeout = setTimeout(() => {

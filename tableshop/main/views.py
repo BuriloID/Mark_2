@@ -12,4 +12,8 @@ def facades(request):
     return render(request, 'main/facades.html')
 def kitchen_detail(request, pk):
     kitchen = get_object_or_404(Kitchen, pk=pk)
-    return render(request, 'main/kitchen_detail.html', {'kitchen': kitchen})
+    images = kitchen.images.all()  # ← вот так правильно!
+    return render(request, 'main/kitchen_detail.html', {
+        'kitchen': kitchen,
+        'images': images,
+    })

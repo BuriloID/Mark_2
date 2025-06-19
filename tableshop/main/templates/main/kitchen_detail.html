@@ -1,0 +1,42 @@
+{% extends "main/base.html" %}
+{% block title %}Кухня № {{ kitchen.name }}{% endblock %}
+
+{% block content %}
+<div class="contacts-breadcrumbs">
+    <a href="/" class="contacts-breadcrumbs-home">Premier Fasad</a>
+    <span class="contacts-breadcrumbs-sep">/</span>
+    <a href="{% url 'kitchen' %}" class="contacts-breadcrumbs-home">Кухни</a>
+    <span class="contacts-breadcrumbs-sep">/</span>
+    <span>№ {{ kitchen.name }}</span>
+</div>
+
+<div class="kitchen-detail-outer">
+  <div class="kitchen-detail-inner">
+    <div class="kitchen-detail-imageblock">
+      <button class="img-nav-btn img-nav-left" onclick="prevImage()">&#10094;</button>
+      {% if images and images|length > 0 %}
+        <img id="kitchen-main-img" src="{{ images.0.image }}" alt="Кухня № {{ kitchen.name }}">
+      {% else %}
+        <img id="kitchen-main-img" src="{{ kitchen.facade_image }}" alt="Кухня № {{ kitchen.name }}">
+      {% endif %}
+      <button class="img-nav-btn img-nav-right" onclick="nextImage()">&#10095;</button>
+      <div class="kitchen-detail-title-overlay">
+        <div class="kitchen-detail-num">№ {{ kitchen.name }}</div>
+      </div>
+    </div>
+    <div class="kitchen-detail-infoblock">
+      <div class="kitchen-detail-props">
+        <div><b>Вид фасада:</b> {{ kitchen.facade_type }}</div>
+        <div><b>Покрытие фасадов:</b> {{ kitchen.facade_coating }}</div>
+        <div><b>Размеры кухни:</b> {{ kitchen.size }}</div>
+        <div><b>Размеры кухонного острова:</b> {{ kitchen.island_size }}</div>
+      </div>
+      <a href="#" class="kitchen-calc-btn">РАССЧИТАТЬ СТОИМОСТЬ</a>
+      <div class="kitchen-detail-warning">
+        <span class="kitchen-detail-warning-icon">i</span>
+        Виды и габаритные размеры шкафов носят исключительно информационный характер и касаются модельных кухонь. Каждая наша кухня может быть подобрана под размеры конкретного помещения и ваших индивидуальных потребностей. Кухни Premier fasad
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
