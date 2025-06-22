@@ -17,3 +17,21 @@ class KitchenImage(models.Model):
 
     def __str__(self):
         return f"Фото для {self.kitchen.name}"
+class Garder(models.Model):
+    title = models.CharField("Название гардеробной", max_length=200)
+    main_image = models.ImageField("Главное изображение", upload_to="garders/main/")
+    size = models.CharField("Размер шкафа на фото", max_length=100)
+    corpus = models.CharField("Корпус", max_length=200)
+    mdf_thickness = models.CharField("Толщина МДФ", max_length=100)
+    drilling = models.CharField("Присадка", max_length=200)
+    # Дополнительные поля по желанию
+
+    def __str__(self):
+        return self.title
+
+class GarderImage(models.Model):
+    garder = models.ForeignKey(Garder, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField("Дополнительное изображение", upload_to="garders/additional/")
+
+    def __str__(self):
+        return f"Фото для {self.garder.title}"

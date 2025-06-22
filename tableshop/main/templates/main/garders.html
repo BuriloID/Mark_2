@@ -13,28 +13,27 @@
   <section class="cat-hero">
     <div class="cat-hero-bg"></div>
     <div class="cat-hero-content">
-      <h1>Кухня</h1>
+      <h1>Гардеробные</h1>
       <p>
-        Ключевые особенности кухни – хороший дизайн и функциональность.<br>
-        Помня об этом, представляем вам избранные проекты типовых кухонь, в которых<br>
-        каждый найдёт <b>КУХНИ ДЛЯ СЕБЯ!</b>
+        Здесь вы найдёте лучшие решения для хранения вещей, которые подойдут для любого интерьера.<br>
+        Индивидуальные проекты, современные материалы и безупречное качество исполнения.
       </p>
     </div>
   </section>
  <section class="kitchen-list-section">
     <div class="kitchen-list">
-      {% for kitchen in kitchens %}
+      {% for garder in garders %}
         <div class="kitchen-card">
           <div class="kitchen-card-image-wrapper">
-            {% if kitchen.facade_image %}
-              <a class="kitchen-card-image-link" href="{% url 'kitchen_detail' kitchen.id %}">
-                <img src="{{ kitchen.facade_image }}" alt="Кухня {{ kitchen.name }}">
+            {% if garder.main_image %}
+              <a class="kitchen-card-image-link" href="{% url 'kitchen_detail' garder.id %}">
+                <img src="{{ garder.main_image }}" alt="Гардеробная {{ garder.title }}">
               </a>
             {% else %}
               <div class="no-photo">Нет фото</div>
             {% endif %}
           </div>
-          <div class="kitchen-title">№ {{ kitchen.name }}</div>
+          <div class="kitchen-title">№ {{ garder.title }}</div>
         </div>
       {% endfor %}
     </div>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Kitchen
+from .models import Kitchen, Garder
 
 def index(request):
     return render(request, "main/index.html")
@@ -17,6 +17,6 @@ def kitchen_detail(request, pk):
         'kitchen': kitchen,
         'images': images,
     })
-def garder(request):
-    kitchens = Kitchen.objects.all()
-    return render(request, 'main/garders.html', {'kitchens': kitchens})
+def garders(request):
+    garders = Garder.objects.all()
+    return render(request, 'main/garders.html', {'garders': garders})
