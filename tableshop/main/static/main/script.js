@@ -44,7 +44,12 @@ function resetSliderInterval() {
     clearInterval(sliderInterval);
     sliderInterval = setInterval(autoSlide, 6000);
 }
-
+let kitchenImgIndex = 0;
+function showKitchenImg(idx, kitchenImages, mainImg) {
+    if (!kitchenImages.length) return;
+    kitchenImgIndex = (idx + kitchenImages.length) % kitchenImages.length;
+    mainImg.src = kitchenImages[kitchenImgIndex];
+}
 document.addEventListener('DOMContentLoaded', function() {
     showSlide(slideIndex);
     sliderInterval = setInterval(autoSlide, 6000);
@@ -53,19 +58,28 @@ document.addEventListener('DOMContentLoaded', function() {
     if (left) left.onclick = () => plusSlide(-1);
     if (right) right.onclick = () => plusSlide(1);
     const kitchenImages = window.kitchenImages || [];
-    let kitchenImgIndex = 0;
     const mainImg = document.getElementById('kitchen-main-img');
     const leftBtn = document.querySelector('.img-nav-left');
     const rightBtn = document.querySelector('.img-nav-right');
     if (mainImg && kitchenImages.length) {
-        function showKitchenImg(idx) {
-            kitchenImgIndex = (idx + kitchenImages.length) % kitchenImages.length;
-            mainImg.src = kitchenImages[kitchenImgIndex];
-        }
-        if (leftBtn) leftBtn.onclick = function() { showKitchenImg(kitchenImgIndex - 1); };
-        if (rightBtn) rightBtn.onclick = function() { showKitchenImg(kitchenImgIndex + 1); };
-        mainImg.addEventListener('click', () => showKitchenImg(kitchenImgIndex + 1));}
+        // Показываем начальное изображение (на всякий случай)
+        mainImg.src = kitchenImages[0];
+        kitchenImgIndex = 0;
+
+        if (leftBtn) leftBtn.onclick = function() { showKitchenImg(kitchenImgIndex - 1, kitchenImages, mainImg); };
+        if (rightBtn) rightBtn.onclick = function() { showKitchenImg(kitchenImgIndex + 1, kitchenImages, mainImg); };
+        mainImg.addEventListener('click', () => showKitchenImg(kitchenImgIndex + 1, kitchenImages, mainImg));
+    }
 });
+function showKitchenImg(idx, kitchenImages, mainImg) {
+    if (!kitchenImages.length) return;
+    kitchenImgIndex = (idx + kitchenImages.length) % kitchenImages.length;
+    mainImg.classList.add('fading');
+    setTimeout(() => {
+        mainImg.src = kitchenImages[kitchenImgIndex];
+        mainImg.onload = () => mainImg.classList.remove('fading');
+    }, 200);
+}
 console.log('main/script.js loaded');
 let popupTimeout = setTimeout(() => {
   document.getElementById('callback-popup').style.display = 'flex';

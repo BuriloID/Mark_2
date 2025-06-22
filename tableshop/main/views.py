@@ -17,3 +17,6 @@ def kitchen_detail(request, pk):
         'kitchen': kitchen,
         'images': images,
     })
+def garder(request):
+    kitchens = Kitchen.objects.all()
+    return render(request, 'main/garders.html', {'kitchens': kitchens})

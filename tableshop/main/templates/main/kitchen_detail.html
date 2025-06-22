@@ -2,6 +2,7 @@
 {% block title %}Кухня № {{ kitchen.name }}{% endblock %}
 
 {% block content %}
+<div class="contacts-hero">
 <div class="contacts-breadcrumbs">
     <a href="/" class="contacts-breadcrumbs-home">Premier Fasad</a>
     <span class="contacts-breadcrumbs-sep">/</span>
@@ -9,16 +10,12 @@
     <span class="contacts-breadcrumbs-sep">/</span>
     <span>№ {{ kitchen.name }}</span>
 </div>
-
+</div>
 <div class="kitchen-detail-outer">
   <div class="kitchen-detail-inner">
     <div class="kitchen-detail-imageblock">
       <button class="img-nav-btn img-nav-left" onclick="prevImage()">&#10094;</button>
-      {% if images and images|length > 0 %}
-        <img id="kitchen-main-img" src="{{ images.0.image }}" alt="Кухня № {{ kitchen.name }}">
-      {% else %}
-        <img id="kitchen-main-img" src="{{ kitchen.facade_image }}" alt="Кухня № {{ kitchen.name }}">
-      {% endif %}
+      <img id="kitchen-main-img" src="{% if kitchen.facade_image %}{{ kitchen.facade_image }}{% elif images %}{{ images.0.image }}{% endif %}" alt="Кухня № {{ kitchen.name }}">
       <button class="img-nav-btn img-nav-right" onclick="nextImage()">&#10095;</button>
       <div class="kitchen-detail-title-overlay">
         <div class="kitchen-detail-num">№ {{ kitchen.name }}</div>
@@ -39,4 +36,12 @@
     </div>
   </div>
 </div>
+<script>
+window.kitchenImages = [
+  {% if kitchen.facade_image %}"{{ kitchen.facade_image }}",{% endif %}
+  {% for img in images %}
+    "{{ img.image }}"{% if not forloop.last %},{% endif %}
+  {% endfor %}
+];
+</script>
 {% endblock %}
