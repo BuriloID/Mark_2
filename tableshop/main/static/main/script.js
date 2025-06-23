@@ -50,6 +50,13 @@ function showKitchenImg(idx, kitchenImages, mainImg) {
     kitchenImgIndex = (idx + kitchenImages.length) % kitchenImages.length;
     mainImg.src = kitchenImages[kitchenImgIndex];
 }
+function openCalcModal() {
+  document.getElementById('calcModal').style.display = 'flex';
+}
+function closeCalcModal() {
+  document.getElementById('calcModal').style.display = 'none';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     showSlide(slideIndex);
     sliderInterval = setInterval(autoSlide, 6000);
@@ -70,6 +77,40 @@ document.addEventListener('DOMContentLoaded', function() {
         if (rightBtn) rightBtn.onclick = function() { showKitchenImg(kitchenImgIndex + 1, kitchenImages, mainImg); };
         mainImg.addEventListener('click', () => showKitchenImg(kitchenImgIndex + 1, kitchenImages, mainImg));
     }
+    const openCalcBtn = document.getElementById('openCalcModal');
+  const closeCalcBtn = document.getElementById('closeCalcModal');
+  const calcModal = document.getElementById('calcModal');
+  const calcForm = document.getElementById('calcForm');
+
+  if (openCalcBtn && calcModal) {
+    openCalcBtn.onclick = openCalcModal;
+  }
+  if (closeCalcBtn && calcModal) {
+    closeCalcBtn.onclick = closeCalcModal;
+  }
+  if (calcForm) {
+    calcForm.onsubmit = function(e) {
+      e.preventDefault();
+      const name = this.name.value.trim();
+      const email = this.email.value.trim();
+      const phone = this.phone.value.trim();
+      const message = this.message.value.trim();
+      let text = `Заявка с сайта\nКонтактное лицо: ${name}\nE-mail: ${email}\nТелефон: ${phone}`;
+      if (message) text += `\nСообщение: ${message}`;
+      const sellerPhone = '79539676218';
+      const waLink = `https://wa.me/${sellerPhone}?text=${encodeURIComponent(text)}`;
+      window.open(waLink, '_blank');
+      closeCalcModal();
+    };
+  }
+
+  if (calcModal) {
+    window.addEventListener('click', function(event) {
+      if (event.target === calcModal) {
+        closeCalcModal();
+      }
+    });
+  }
 });
 function showKitchenImg(idx, kitchenImages, mainImg) {
     if (!kitchenImages.length) return;

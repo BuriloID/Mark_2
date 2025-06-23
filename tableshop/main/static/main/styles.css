@@ -1226,3 +1226,47 @@
         padding: 0;
     }
 }
+.modal-calc {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.36);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-calc-content {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 430px;
+  width: 96vw;
+  padding: 28px 22px 18px 22px;
+  box-shadow: 0 2px 18px rgba(0,0,0,0.06);
+  position: relative;
+}
+
+.modal-calc-close {
+  position: absolute;
+  right: 17px;
+  top: 10px;
+  font-size: 2em;
+  color: #aaa;
+  cursor: pointer;
+}
+
+#calcForm input,
+#calcForm textarea {
+  width: 100%;
+  margin-bottom: 13px;
+  padding: 10px 12px;
+  border: 1px solid #bababa;
+  border-radius: 4px;
+  font-size: 1.05em;
+  background: #fafafa;
+}
+
+#calcForm textarea {
+  min-height: 100px;
+  resize: vertical;
+}
