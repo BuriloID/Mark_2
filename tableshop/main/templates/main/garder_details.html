@@ -40,8 +40,12 @@
     <form id="calcForm">
       <input type="text" name="name" placeholder="Контактное лицо" required>
       <input type="email" name="email" placeholder="E-mail" required>
-      <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" required>
+      <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" required>
       <textarea name="message" placeholder="Ваше сообщение (не обязательно)"></textarea>
+      <div class="file-drop-area" id="fileDropArea">
+  <input type="file" name="attachment" id="attachment" class="file-input" />
+  <span class="file-message" id="fileMsg">Перетащите файл сюда или кликните для выбора</span>
+</div>
       <!-- Блок загрузки файлов можно сделать позже, для WhatsApp это не имеет смысла -->
       <button type="submit" class="kitchen-calc-btn">ОТПРАВИТЬ ЗАЯВКУ</button>
     </form>

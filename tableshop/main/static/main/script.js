@@ -89,20 +89,30 @@ document.addEventListener('DOMContentLoaded', function() {
     closeCalcBtn.onclick = closeCalcModal;
   }
   if (calcForm) {
-    calcForm.onsubmit = function(e) {
-      e.preventDefault();
-      const name = this.name.value.trim();
-      const email = this.email.value.trim();
-      const phone = this.phone.value.trim();
-      const message = this.message.value.trim();
-      let text = `Заявка с сайта\nКонтактное лицо: ${name}\nE-mail: ${email}\nТелефон: ${phone}`;
-      if (message) text += `\nСообщение: ${message}`;
-      const sellerPhone = '79539676218';
-      const waLink = `https://wa.me/${sellerPhone}?text=${encodeURIComponent(text)}`;
-      window.open(waLink, '_blank');
-      closeCalcModal();
-    };
-  }
+  calcForm.onsubmit = function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    fetch('/send_to_telegram/', {
+      method: 'POST',
+      body: formData,
+      // headers: { 'X-CSRFToken': csrftoken }, // если нужна csrf
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      if (data.ok) {
+        alert('Заявка отправлена!');
+        calcForm.reset();
+        closeCalcModal();
+      } else {
+        alert('Ошибка отправки. Попробуйте ещё раз.');
+      }
+    })
+    .catch(() => {
+      alert('Ошибка соединения. Попробуйте ещё раз.');
+    });
+  };
+}
 
   if (calcModal) {
     window.addEventListener('click', function(event) {
@@ -110,6 +120,62 @@ document.addEventListener('DOMContentLoaded', function() {
         closeCalcModal();
       }
     });
+  }
+  const fileDropArea = document.getElementById('fileDropArea');
+  const fileInput = document.getElementById('attachment');
+  const fileMsg = document.getElementById('fileMsg');
+
+  if (fileDropArea && fileInput && fileMsg) {
+    fileDropArea.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', function() {
+      if (fileInput.files.length > 0) {
+        fileMsg.textContent = fileInput.files[0].name;
+      } else {
+        fileMsg.textContent = "Перетащите файл сюда или кликните для выбора";
+      }
+    });
+
+    fileDropArea.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      fileDropArea.classList.add('dragover');
+    });
+    fileDropArea.addEventListener('dragleave', function(e) {
+      fileDropArea.classList.remove('dragover');
+    });
+    fileDropArea.addEventListener('drop', function(e) {
+      e.preventDefault();
+      fileDropArea.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        fileInput.files = e.dataTransfer.files;
+        fileInput.dispatchEvent(new Event('change'));
+      }
+    });
+  }
+  const callbackForm = document.getElementById('callback-form');
+  if (callbackForm) {
+    callbackForm.onsubmit = function(event) {
+      event.preventDefault();
+      const formData = new FormData(callbackForm);
+
+      fetch('/send_callback_to_telegram/', {
+        method: 'POST',
+        body: formData,
+      })
+      .then(resp => resp.json())
+      .then(data => {
+        if (data.ok) {
+          alert('Заявка отправлена! Мы вам перезвоним.');
+          callbackForm.reset();
+          closePopup(); // если нужно закрыть попап
+        } else {
+          alert('Ошибка отправки. Попробуйте ещё раз.');
+        }
+      })
+      .catch(() => {
+        alert('Ошибка соединения. Попробуйте ещё раз.');
+      });
+    };
   }
 });
 function showKitchenImg(idx, kitchenImages, mainImg) {
@@ -121,6 +187,7 @@ function showKitchenImg(idx, kitchenImages, mainImg) {
         mainImg.onload = () => mainImg.classList.remove('fading');
     }, 200);
 }
+
 console.log('main/script.js loaded');
 let popupTimeout = setTimeout(() => {
   document.getElementById('callback-popup').style.display = 'flex';
@@ -132,19 +199,4 @@ function openPopup() {
 function closePopup() {
   document.getElementById('callback-popup').style.display = 'none';
   clearTimeout(popupTimeout);
-}
-
-function sendWhatsApp(event) {
-  event.preventDefault();
-  const day = document.getElementById('day').value;
-  const time = document.getElementById('time').value;
-  const phone = document.getElementById('phone').value;
-
-  const sellerPhone = '79539676218';
-  const msg = encodeURIComponent(
-    `Здравствуйте! Прошу перезвонить мне в ${day} в ${time}, мой номер: ${phone}`
-  );
-  const waLink = `https://wa.me/${sellerPhone}?text=${msg}`;
-  window.open(waLink, '_blank');
-  closePopup();
 }

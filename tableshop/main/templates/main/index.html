@@ -8,24 +8,24 @@
     <img src="logo.png" alt="Премьер фасад" class="popup-logo">
     <div class="popup-content">
       <h3>Здравствуйте! Оставьте номер, и мы вам перезвоним!</h3>
-      <form id="callback-form" onsubmit="sendWhatsApp(event)">
-        <select id="day" required>
-          <option value="" disabled selected>Выберите день</option>
-          <option>Понедельник</option>
-          <option>Вторник</option>
-          <option>Среда</option>
-          <option>Четверг</option>
-          <option>Пятница</option>
-          <option>Суббота</option>
-          <option>Воскресенье</option>
-        </select>
-        <input type="time" id="time" required placeholder="Время">
-        <input type="tel" id="phone" placeholder="Телефон" required>
-        <button type="submit" class="green-btn">Жду звонка!</button>
-        <p class="agreement">
-          Нажимая на кнопку "Жду звонка!", я даю свое согласие на обработку персональных данных и принимаю <a href="#" target="_blank">условия соглашения</a>
-        </p>
-      </form>
+      <form id="callback-form">
+  <select id="day" name="day" required>
+    <option value="" disabled selected>Выберите день</option>
+    <option>Понедельник</option>
+    <option>Вторник</option>
+    <option>Среда</option>
+    <option>Четверг</option>
+    <option>Пятница</option>
+    <option>Суббота</option>
+    <option>Воскресенье</option>
+  </select>
+  <input type="time" id="time" name="time" required placeholder="Время">
+  <input type="tel" id="phone" name="phone" placeholder="Телефон" required>
+  <button type="submit" class="call-btn">Жду звонка!</button>
+  <p class="agreement">
+    Нажимая на кнопку "Жду звонка!", я даю свое согласие на обработку персональных данных и принимаю <a href="#" target="_blank">условия соглашения</a>
+  </p>
+</form>
     </div>
   </div>
 </div>
