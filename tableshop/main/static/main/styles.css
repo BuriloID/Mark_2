@@ -1152,7 +1152,7 @@
     color: #333;
     font-weight: 600;
 }
-.product-calc-btn {
+.product-calc-btn, .call-btn {
     display: block;
     width: 100%;
     background: #111;
@@ -1220,7 +1220,6 @@
     }
 }
 
-/* Модальное окно калькулятора и дропзона для файла оставляем без изменений */
 .modal-calc {
   position: fixed;
   z-index: 9999;
