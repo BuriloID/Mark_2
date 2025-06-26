@@ -34,3 +34,30 @@ class GarderImage(models.Model):
 
     def __str__(self):
         return f"Фото для {self.garder.title}"
+
+class Facade(models.Model):
+    title = models.CharField(max_length=255)
+    main_image = models.ImageField(upload_to='facades/')
+    type = models.CharField(max_length=255, verbose_name="Вид фасада")
+    frame = models.CharField(max_length=255, verbose_name="Рамка")
+    panel = models.CharField(max_length=255, verbose_name="Филёнка")
+
+    def __str__(self):
+        return self.title
+
+class FinishingMaterial(models.Model):
+    facade = models.ForeignKey(Facade, related_name='materials', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.facade.title}: {self.name}"
+
+class FinishingColor(models.Model):
+    material = models.ForeignKey(FinishingMaterial, related_name='colors', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='facades/colors/')  # <--- Картинка-образец
+    code = models.CharField(max_length=50, blank=True, help_text="Код цвета или артикул")
+
+    def __str__(self):
+        return f"{self.material.name}: {self.name}"

@@ -1,6 +1,6 @@
 import requests
 from django.shortcuts import render, get_object_or_404
-from .models import Kitchen, Garder
+from .models import Kitchen, Garder, Facade
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
@@ -89,3 +89,9 @@ def garder_detail(request, pk):
         'images': images,
         'product_type': 'Гардеробные',
     })
+def facades(request):
+    facades = Facade.objects.all()
+    return render(request, 'main/facades.html', {'facades': facades})
+def facade_detail(request, pk):
+    facade = get_object_or_404(Facade, pk=pk)
+    return render(request, 'facade_detail.html', {'facade': facade})

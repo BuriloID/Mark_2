@@ -5,7 +5,7 @@
   <nav class="kitchen-nav" id="kitchenNav">
     <ul>
       <li><a href="{% url 'kitchen' %}">Кухни</a></li>
-      <li><a href=#>Гардеробные</a></li>
+      <li><a href="{% url 'garders' %}">Гардеробные</a></li>
       <li class="active"><a href="{% url 'facades' %}">Фасады</a></li>
       <li><a href=#>Дополнительные элементы</a></li>
     </ul>
@@ -19,6 +19,20 @@
         Мы соединяем эти элементы, чтобы вы почувствовали в своем интерьере наши<br>
         источники вдохновения для создания <b>ИДЕАЛЬНОЙ КУХНИ.</b>
       </p>
+    </div>
+  </section>
+  <section class="facades-list">
+    <div class="facades-grid">
+      {% for facade in facades %}
+        <div class="facade-card">
+          <a href="{% url 'facade_detail' facade.id %}">
+            <img src="{{ facade.main_image }}" alt="{{ facade.title }}" class="facade-img">
+            <div class="facade-title">{{ facade.title }}</div>
+          </a>
+        </div>
+      {% empty %}
+        <p>Фасады пока не добавлены.</p>
+      {% endfor %}
     </div>
   </section>
 {% endblock %}
