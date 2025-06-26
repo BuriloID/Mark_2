@@ -820,12 +820,6 @@
   font-size: 16px;
   box-sizing: border-box;
 }
-
-.call-btn {
-  background: #000; color: #fff; font-size: 20px;
-  border: none; border-radius: 6px; padding: 11px 0;
-  width: 100%; cursor: pointer; margin-top: 12px;
-}
 .agreement {
   font-size: 12px; color: #666; margin: 7px 0 0 0;
 }
@@ -1061,12 +1055,12 @@
         font-size: 1.1em;
     }
 }
-.kitchen-detail-outer {
+.product-detail-outer {
     padding: 0 40px;
     margin-top: 36px;
     margin-bottom: 50px;
 }
-.kitchen-detail-inner {
+.product-detail-inner {
     display: flex;
     flex-wrap: wrap;
     gap: 44px;
@@ -1074,21 +1068,21 @@
     max-width: 100%;
     margin: 0 auto;
     background: #fff;
-    align-items: center; 
+    align-items: center;
     box-shadow: 0 2px 14px rgba(0,0,0,0.05);
     padding: 32px 0;
 }
-.kitchen-detail-imageblock {
+.product-detail-imageblock {
     height: 480px;
     position: relative;
     display: flex;
-    align-items: stretch; 
+    align-items: stretch;
     justify-content: center;
     min-width: 340px;
     max-width: 720px;
     width: 720px;
 }
-.kitchen-detail-imageblock img {
+.product-detail-imageblock img {
     width: 100%;
     height: 100%;
     min-height: 0;
@@ -1098,10 +1092,10 @@
     box-shadow: 0 2px 16px rgba(0,0,0,0.09);
     transition: opacity 0.45s cubic-bezier(0.4,0.2,0.2,1);
 }
-.kitchen-detail-imageblock img.fading {
+.product-detail-imageblock img.fading {
     opacity: 0;
 }
-.kitchen-detail-title-overlay {
+.product-detail-title-overlay {
     position: absolute;
     top: 12px;
     left: 12px;
@@ -1111,13 +1105,12 @@
     padding: 16px 24px;
     border-radius: 8px;
 }
-.kitchen-detail-num {
+.product-detail-title {
     font-size: 1.8em;
     font-weight: 400;
     margin-bottom: 8px;
     line-height: 1.0;
 }
-
 .img-nav-btn {
     position: absolute;
     top: 50%;
@@ -1141,7 +1134,7 @@
 .img-nav-left { left: 8px; }
 .img-nav-right { right: 8px; }
 
-.kitchen-detail-infoblock {
+.product-detail-infoblock {
     flex: 1;
     min-width: 320px;
     max-width: 380px;
@@ -1150,16 +1143,16 @@
     flex-direction: column;
     align-items: flex-start;
 }
-.kitchen-detail-props {
+.product-detail-props {
     font-size: 1.16em;
     color: #222;
     margin-bottom: 30px;
 }
-.kitchen-detail-props b {
+.product-detail-props b {
     color: #333;
     font-weight: 600;
 }
-.kitchen-calc-btn {
+.product-calc-btn {
     display: block;
     width: 100%;
     background: #111;
@@ -1176,10 +1169,10 @@
     transition: background 0.2s;
     border: none;
 }
-.kitchen-calc-btn:hover {
+.product-calc-btn:hover {
     background: #333;
 }
-.kitchen-detail-warning {
+.product-detail-warning {
     background: #f7f9e7;
     border-radius: 8px;
     padding: 20px 16px;
@@ -1188,37 +1181,37 @@
     position: relative;
     margin-top: 18px;
 }
-.kitchen-detail-warning-icon {
+.product-detail-warning-icon {
     font-weight: bold;
     font-size: 1.2em;
     color: #b6b900;
     margin-right: 8px;
 }
 @media (max-width: 1050px) {
-    .kitchen-detail-inner {
+    .product-detail-inner {
         flex-direction: column;
         align-items: center;
         gap: 20px;
         padding: 20px 0;
     }
-    .kitchen-detail-infoblock {
+    .product-detail-infoblock {
         margin-top: 12px;
         max-width: 700px;
         width: 100%;
     }
 }
 @media (max-width: 600px) {
-    .kitchen-detail-outer {
+    .product-detail-outer {
         padding: 0 4vw;
     }
-    .kitchen-detail-inner {
+    .product-detail-inner {
         padding: 2vw 0;
     }
-    .kitchen-detail-imageblock img {
+    .product-detail-imageblock img {
         max-width: 98vw;
         max-height: 260px;
     }
-    .kitchen-detail-title-overlay {
+    .product-detail-title-overlay {
         position: static;
         background: none;
         color: #222;
@@ -1226,17 +1219,18 @@
         padding: 0;
     }
 }
+
+/* Модальное окно калькулятора и дропзона для файла оставляем без изменений */
 .modal-calc {
   position: fixed;
   z-index: 9999;
   left: 0; top: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.36);
-  display: none; /* flex при открытии */
+  display: none; 
   justify-content: center;
   align-items: center;
   transition: background 0.2s;
 }
-
 .modal-calc-content {
   background: #fff;
   border-radius: 12px;
@@ -1247,12 +1241,10 @@
   box-sizing: border-box;
   animation: modalAppear 0.23s cubic-bezier(.61,1.08,.56,1.08);
 }
-
 @keyframes modalAppear {
   from { transform: translateY(-60px) scale(0.98); opacity: 0; }
   to   { transform: none; opacity: 1; }
 }
-
 .modal-calc-close {
   position: absolute;
   right: 18px;
@@ -1264,7 +1256,7 @@
   line-height: 1;
   z-index: 1;
 }
-.modal-calc-close:hover { color: #1b911f; }
+.modal-calc-close:hover { color: black; }
 
 #calcForm input,
 #calcForm textarea {
@@ -1282,22 +1274,20 @@
 }
 #calcForm input:focus,
 #calcForm textarea:focus {
-  border-color: #1b911f;
+  border-color: black;
   box-shadow: 0 0 0 2px #1b911f22;
   background: #fff;
 }
-
 #calcForm textarea {
   min-height: 90px;
   resize: vertical;
   margin-bottom: 16px;
 }
-
 #calcForm input[type="submit"], #calcForm button[type="submit"] {
   margin-bottom: 0;
 }
 #calcForm {
-  margin-top: 34px; 
+  margin-top: 34px;
 }
 @media (max-width: 500px) {
   .modal-calc-content {
@@ -1322,18 +1312,85 @@
   color: #21242b;
   text-align: center;
 }
-
 .file-drop-area.dragover {
   border-color: #3372e0;
   background: #eaf3ff;
 }
-
 .file-input {
   display: none;
 }
-
 .file-message {
   pointer-events: none;
   color: #5c6270;
   font-size: 17px;
+}
+.info-title {
+    font-weight: 700;
+    font-size: 1.06em;
+    margin-bottom: 3px;
+    letter-spacing: 0.01em;
+}
+
+.info-label {
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.info-list {
+    list-style: none;
+    margin: 14px 0 8px 0;
+    padding: 0;
+}
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 9px;
+    color: #191919;
+    font-weight: 500;
+    font-size: 1.09em;
+}
+.info-item .dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    margin-right: 13px;
+}
+.info-item .fa-circle {
+    color: #101010;
+    font-size: 1.22em;
+    font-weight: 900;
+}
+
+.info-list-black {
+    list-style: none;
+    margin: 13px 0 2px 0;
+    padding: 0;
+}
+
+.info-item-black {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 5px;
+    color: #232323;
+    font-size: 0.99em;
+}
+
+.info-item-black .check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 22px;
+    min-width: 20px;
+    min-height: 22px;
+    font-size: 1.09em;
+    margin-right: 8px;
+    color: #111;
+    background: none;
+    font-family: inherit;
+    line-height: 1;
 }

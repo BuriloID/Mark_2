@@ -13,11 +13,22 @@ def send_to_telegram(request):
         email = request.POST.get('email', '')
         phone = request.POST.get('phone', '')
         message = request.POST.get('message', '')
+        product_name = request.POST.get('product_name', '')
+        product_url = request.POST.get('product_url', '')
+        product_type = request.POST.get('product_type', '')
         text = (f"📝 Новая заявка с сайта Премьер Фасад:\n"
                 f"👤 Имя: {name}\n"
                 f"📧 Email: {email}\n"
                 f"📞 Телефон: {phone}\n"
                 f"💬 Сообщение: {message}")
+        if product_name or product_url or product_type:
+            text += "\n📦 Детали заказа:\n"
+            if product_name:
+                text += f"• Товар: {product_name}\n"
+            if product_url:
+                text += f"• Ссылка: {product_url}\n"
+            if product_type:
+                text += f"• Тип: {product_type}\n"
         url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
         data = {'chat_id': TELEGRAM_CHAT_ID, 'text': text}
         requests.post(url, data=data)
@@ -65,7 +76,16 @@ def kitchen_detail(request, pk):
     return render(request, 'main/kitchen_detail.html', {
         'kitchen': kitchen,
         'images': images,
+        'product_type': 'Кухни',
     })
 def garders(request):
     garders = Garder.objects.all()
     return render(request, 'main/garders.html', {'garders': garders})
+def garder_detail(request, pk):
+    garder = get_object_or_404(Garder, pk=pk)
+    images = garder.images.all()  # ← вот так правильно!
+    return render(request, 'main/garder_detail.html', {
+        'garder': garder,
+        'images': images,
+        'product_type': 'Гардеробные',
+    })

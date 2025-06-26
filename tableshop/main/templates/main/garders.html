@@ -26,7 +26,7 @@
         <div class="kitchen-card">
           <div class="kitchen-card-image-wrapper">
             {% if garder.main_image %}
-              <a class="kitchen-card-image-link" href="{% url 'kitchen_detail' garder.id %}">
+              <a class="kitchen-card-image-link" href="{% url 'garder_detail' garder.id %}">
                 <img src="{{ garder.main_image }}" alt="Гардеробная {{ garder.title }}">
               </a>
             {% else %}

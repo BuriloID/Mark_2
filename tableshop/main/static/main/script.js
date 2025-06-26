@@ -44,11 +44,15 @@ function resetSliderInterval() {
     clearInterval(sliderInterval);
     sliderInterval = setInterval(autoSlide, 6000);
 }
-let kitchenImgIndex = 0;
-function showKitchenImg(idx, kitchenImages, mainImg) {
-    if (!kitchenImages.length) return;
-    kitchenImgIndex = (idx + kitchenImages.length) % kitchenImages.length;
-    mainImg.src = kitchenImages[kitchenImgIndex];
+let productImgIndex = 0;
+function showProductImg(idx, productImages, mainImg) {
+    if (!productImages.length) return;
+    productImgIndex = (idx + productImages.length) % productImages.length;
+    mainImg.classList.add('fading');
+    setTimeout(() => {
+        mainImg.src = productImages[productImgIndex];
+        mainImg.onload = () => mainImg.classList.remove('fading');
+    }, 200);
 }
 function openCalcModal() {
   document.getElementById('calcModal').style.display = 'flex';
@@ -64,18 +68,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const right = document.querySelector('.slider-arrow.right');
     if (left) left.onclick = () => plusSlide(-1);
     if (right) right.onclick = () => plusSlide(1);
-    const kitchenImages = window.kitchenImages || [];
-    const mainImg = document.getElementById('kitchen-main-img');
+    const productImages = window.productImages || [];
+    const mainImg = document.getElementById('product-main-img');
     const leftBtn = document.querySelector('.img-nav-left');
     const rightBtn = document.querySelector('.img-nav-right');
-    if (mainImg && kitchenImages.length) {
-        // Показываем начальное изображение (на всякий случай)
-        mainImg.src = kitchenImages[0];
-        kitchenImgIndex = 0;
-
-        if (leftBtn) leftBtn.onclick = function() { showKitchenImg(kitchenImgIndex - 1, kitchenImages, mainImg); };
-        if (rightBtn) rightBtn.onclick = function() { showKitchenImg(kitchenImgIndex + 1, kitchenImages, mainImg); };
-        mainImg.addEventListener('click', () => showKitchenImg(kitchenImgIndex + 1, kitchenImages, mainImg));
+    if (mainImg && productImages.length) {
+        mainImg.src = productImages[0];
+        productImgIndex = 0;
+        if (leftBtn) leftBtn.onclick = function() { showProductImg(productImgIndex - 1, productImages, mainImg); };
+        if (rightBtn) rightBtn.onclick = function() { showProductImg(productImgIndex + 1, productImages, mainImg); };
+        mainImg.addEventListener('click', () => showProductImg(productImgIndex + 1, productImages, mainImg));
     }
     const openCalcBtn = document.getElementById('openCalcModal');
   const closeCalcBtn = document.getElementById('closeCalcModal');
@@ -96,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/send_to_telegram/', {
       method: 'POST',
       body: formData,
-      // headers: { 'X-CSRFToken': csrftoken }, // если нужна csrf
     })
     .then(resp => resp.json())
     .then(data => {
@@ -167,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data.ok) {
           alert('Заявка отправлена! Мы вам перезвоним.');
           callbackForm.reset();
-          closePopup(); // если нужно закрыть попап
+          closePopup(); 
         } else {
           alert('Ошибка отправки. Попробуйте ещё раз.');
         }

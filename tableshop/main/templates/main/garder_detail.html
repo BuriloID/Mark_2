@@ -1,0 +1,92 @@
+{% extends "main/base.html" %}
+{% block title %}Гардеробная {{ garder.title }}{% endblock %}
+
+{% block content %}
+<div class="contacts-hero">
+  <div class="contacts-breadcrumbs">
+    <a href="/" class="contacts-breadcrumbs-home">Premier Fasad</a>
+    <span class="contacts-breadcrumbs-sep">/</span>
+    <a href="{% url 'garders' %}" class="contacts-breadcrumbs-home">Гардеробные</a>
+    <span class="contacts-breadcrumbs-sep">/</span>
+    <span>№ {{ garder.title }}</span>
+  </div>
+</div>
+<div class="product-detail-outer">
+  <div class="product-detail-inner">
+    <div class="product-detail-imageblock">
+      <button class="img-nav-btn img-nav-left" type="button">&#10094;</button>
+      <img id="product-main-img"
+           src="{% if garder.main_image %}{{ garder.main_image.url }}{% elif images %}{{ images.0.image.url }}{% endif %}"
+           alt="Гардеробная {{ garder.title }}">
+      <button class="img-nav-btn img-nav-right" type="button">&#10095;</button>
+      <div class="product-detail-title-overlay">
+        <div class="product-detail-title">№ {{ garder.title }}</div>
+      </div>
+    </div>
+    <div class="product-detail-infoblock">
+  <div class="info-title">
+    <b>Размер гардеробной:</b> {{ garder.size }}
+  </div>
+  <div class="info-label">
+    <b>Корпус:</b> на выбор более 180 цветов ДСП, МДФ, Шпон, Глянец, Кожа.
+  </div>
+  <ul class="info-list">
+    <li class="info-item">
+      <span class="dot"><i class="fa-solid fa-circle"></i></span>
+      Толщина МДФ {{ garder.mdf_thickness }}
+    </li>
+    <li class="info-item">
+      <span class="dot"><i class="fa-solid fa-circle"></i></span>
+      Изготавливается по размерам заказчика
+    </li>
+    <li class="info-item">
+      <span class="dot"><i class="fa-solid fa-circle"></i></span>
+      {{ garder.drilling }}
+    </li>
+</ul>
+  <ul class="info-list-black">
+    <li class="info-item-black">
+      <span class="check">✓</span>
+      В разделе “Дополнительные элементы” вы можете выбрать любые ручки, механизмы, наполнение.
+    </li>
+    <li class="info-item-black">
+      <span class="check">✓</span>
+      Подберем по вашим предпочтениям.
+    </li>
+    <li class="info-item-black">
+      <span class="check">✓</span>
+      Наши профессиональные покрасочные камеры работают по цветовым палитрам RAL, NSC, ICA.
+    </li>
+  </ul>
+      <button class="product-calc-btn" id="openCalcModal" type="button">Рассчитать стоимость</button>
+      <div class="modal-calc" id="calcModal" style="display:none;">
+        <div class="modal-calc-content">
+          <span class="modal-calc-close" id="closeCalcModal">&times;</span>
+          <form id="calcForm">
+            <input type="hidden" name="product_name" value="{{ garder.title }}">
+<input type="hidden" name="product_url" value="{{ request.build_absolute_uri }}">
+<input type="hidden" name="product_type" value="{{ product_type }}">
+            <input type="text" name="name" placeholder="Контактное лицо" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" required>
+            <textarea name="message" placeholder="Ваше сообщение (не обязательно)"></textarea>
+            <div class="file-drop-area" id="fileDropArea">
+              <input type="file" name="attachment" id="attachment" class="file-input" />
+              <span class="file-message" id="fileMsg">Перетащите файл сюда или кликните для выбора</span>
+            </div>
+            <button type="submit" class="product-calc-btn">ОТПРАВИТЬ ЗАЯВКУ</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+window.productImages = [
+  {% if garder.main_image %}"{{ garder.main_image }}",{% endif %}
+  {% for img in images %}
+    "{{ img.image }}"{% if not forloop.last %},{% endif %}
+  {% endfor %}
+];
+</script>
+{% endblock %}
