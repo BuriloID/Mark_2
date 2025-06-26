@@ -12,6 +12,15 @@
   </div>
 </div>
 <div class="product-detail-outer">
+  <div class="product-detail-flex">
+   <div class="product-thumbnails">
+    {% if garder.main_image %}
+      <img src="{{ garder.main_image }}" class="thumbnail-img active" onclick="setMainImage('{{ garder.main_image }}', this)">
+    {% endif %}
+    {% for img in images %}
+      <img src="{{ img.image }}" class="thumbnail-img" onclick="setMainImage('{{ img.image }}', this)">
+    {% endfor %}
+</div>
   <div class="product-detail-inner">
     <div class="product-detail-imageblock">
       <button class="img-nav-btn img-nav-left" type="button">&#10094;</button>
@@ -76,6 +85,7 @@
             </div>
             <button type="submit" class="product-calc-btn">ОТПРАВИТЬ ЗАЯВКУ</button>
           </form>
+          </div>
         </div>
       </div>
     </div>

@@ -188,7 +188,19 @@ function showKitchenImg(idx, kitchenImages, mainImg) {
         mainImg.onload = () => mainImg.classList.remove('fading');
     }, 200);
 }
-
+function setMainImage(src, el) {
+    const mainImg = document.getElementById('product-main-img');
+    if (mainImg.src === src || mainImg.getAttribute('src') === src) return;
+    document.querySelectorAll('.thumbnail-img').forEach(img => img.classList.remove('active'));
+    el.classList.add('active');
+    mainImg.classList.add('fading');
+    setTimeout(() => {
+        mainImg.src = src;
+        mainImg.onload = () => {
+            mainImg.classList.remove('fading');
+        };
+    }, 220); 
+}
 console.log('main/script.js loaded');
 let popupTimeout = setTimeout(() => {
   document.getElementById('callback-popup').style.display = 'flex';

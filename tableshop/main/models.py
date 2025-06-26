@@ -24,7 +24,6 @@ class Garder(models.Model):
     corpus = models.CharField("Корпус", max_length=200)
     mdf_thickness = models.CharField("Толщина МДФ", max_length=100)
     drilling = models.CharField("Присадка", max_length=200)
-    # Дополнительные поля по желанию
 
     def __str__(self):
         return self.title

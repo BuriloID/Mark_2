@@ -72,7 +72,7 @@ def facades(request):
     return render(request, 'main/facades.html')
 def kitchen_detail(request, pk):
     kitchen = get_object_or_404(Kitchen, pk=pk)
-    images = kitchen.images.all()  # ← вот так правильно!
+    images = kitchen.images.all() 
     return render(request, 'main/kitchen_detail.html', {
         'kitchen': kitchen,
         'images': images,
@@ -83,7 +83,7 @@ def garders(request):
     return render(request, 'main/garders.html', {'garders': garders})
 def garder_detail(request, pk):
     garder = get_object_or_404(Garder, pk=pk)
-    images = garder.images.all()  # ← вот так правильно!
+    images = garder.images.all() 
     return render(request, 'main/garder_detail.html', {
         'garder': garder,
         'images': images,

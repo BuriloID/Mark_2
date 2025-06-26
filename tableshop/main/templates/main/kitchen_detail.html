@@ -12,6 +12,15 @@
   </div>
 </div>
 <div class="product-detail-outer">
+   <div class="product-detail-flex">
+   <div class="product-thumbnails">
+        {% if kitchen.facade_image %}
+          <img src="{{ kitchen.facade_image }}" class="thumbnail-img{% if kitchen.facade_image == productImages.0 %} active{% endif %}" onclick="setMainImage('{{ kitchen.facade_image }}', this)">
+        {% endif %}
+        {% for img in images %}
+          <img src="{{ img.image }}" class="thumbnail-img" onclick="setMainImage('{{ img.image }}', this)">
+        {% endfor %}
+      </div>
   <div class="product-detail-inner">
     <div class="product-detail-imageblock">
       <button class="img-nav-btn img-nav-left" onclick="prevImage()">&#10094;</button>
@@ -50,6 +59,7 @@
             </div>
             <button type="submit" class="product-calc-btn">ОТПРАВИТЬ ЗАЯВКУ</button>
           </form>
+          </div>
         </div>
       </div>
     </div>
