@@ -915,17 +915,16 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 3px 18px rgba(120,120,120,0.05);
-  background: #fff; /* fallback, если нет картинки */
+  background: #fff; 
 }
 
 .cat-hero-bg {
-  background: url('/static/img/kitchen-bg.jpg') center center/cover no-repeat;
   width: 100%;
   height: 350px;
-  filter: brightness(0.97) blur(1.5px);
+  filter: brightness(0.97) blur(1.2px);
 }
 
-.cat-hero-content {
+.cat-hero-content {    
   position: absolute;
   width: 100%;
   top: 52%; left: 0;
@@ -961,7 +960,7 @@
 
 .kitchen-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
     gap: 48px 48px;
     justify-items: center;
 }
