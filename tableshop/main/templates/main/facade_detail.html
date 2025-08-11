@@ -1,0 +1,47 @@
+{% extends "main/base.html" %}
+{% block title %}Фасад №{{ facade.title }} — Детали фасада{% endblock %}
+
+{% block content %}
+<div class="contacts-hero">
+  <div class="contacts-breadcrumbs">
+    <a href="/" class="contacts-breadcrumbs-home">Premier Fasad</a>
+    <span class="contacts-breadcrumbs-sep">/</span>
+    <a href="{% url 'facades' %}" class="contacts-breadcrumbs-home">Фасады</a>
+    <span class="contacts-breadcrumbs-sep">/</span>
+    <span>Фасад №{{ facade.title }}</span>
+  </div>
+</div>
+<div class="facade-detail-card">
+  <div class="facade-detail-flex">
+    <div class="facade-detail-img-col">
+      <img src="{{ facade.main_image }}" alt="{{ facade.title }}" class="facade-detail-img">
+    </div>
+    <div class="facade-detail-content">
+      <div class="facade-detail-title">ВАРИАНТЫ ОТДЕЛКИ ФАСАДА:</div>
+      <div class="facade-detail-info">
+        <div><b>Вид:</b> {{ facade.type }}</div>
+        <div><b>Рамка:</b> {{ facade.frame }}</div>
+        <div><b>Филёнка:</b> {{ facade.panel }}</div>
+      </div>
+      <button class="product-calc-btn" id="openCalcModal" type="button">Рассчитать стоимость</button>
+      <div class="modal-calc" id="calcModal" style="display:none;">
+        <div class="modal-calc-content">
+          <span class="modal-calc-close" id="closeCalcModal">&times;</span>
+          <form id="calcForm">
+            <input type="hidden" name="product_name" value="{{ garder.title }}">
+<input type="hidden" name="product_url" value="{{ request.build_absolute_uri }}">
+<input type="hidden" name="product_type" value="{{ product_type }}">
+            <input type="text" name="name" placeholder="Контактное лицо" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="tel" name="phone" placeholder="+7 (999) 999-99-99" required>
+            <textarea name="message" placeholder="Ваше сообщение (не обязательно)"></textarea>
+            <div class="file-drop-area" id="fileDropArea">
+              <input type="file" name="attachment" id="attachment" class="file-input" />
+              <span class="file-message" id="fileMsg">Перетащите файл сюда или кликните для выбора</span>
+            </div>
+            <button type="submit" class="product-calc-btn">ОТПРАВИТЬ ЗАЯВКУ</button>
+          </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

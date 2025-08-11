@@ -1446,7 +1446,7 @@
   margin: 40px 0 24px 0;
 }
 .facade-card {
-  width: 240px;
+  width: 320px;
   text-align: center;
   background: transparent;
   box-shadow: none;
@@ -1462,7 +1462,7 @@
 .facade-img {
   width: 100%;
   height: auto;
-  max-width: 240px;
+  max-width: 320px;
   margin: 0 auto;
   display: block;
   background: transparent;
@@ -1479,8 +1479,57 @@
     margin-top: 14px;
   font-size: 1.5rem;
   font-weight: 300;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: 'Montserrat', 'Inter', 'Roboto', Arial, sans-serif;
   letter-spacing: 0.01em;
   line-height: 1.22;
   color: #232323;
+}
+.facade-detail-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 24px #0002;
+  padding: 36px 36px 52px 36px;
+  margin: 32px 32px;
+  max-width: 1800px;
+}
+
+.facade-detail-flex {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.facade-detail-img-col {
+  flex: 0 0 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.facade-detail-img {
+  width: 540px;
+  max-width: 100%;
+  box-shadow: 0 1px 8px #0001;
+  margin-bottom: 0;
+}
+
+.facade-detail-content {
+   flex: 1;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 18px;
+  margin-left: 64px;
+}
+
+.facade-detail-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.facade-detail-info {
+  font-size: 18px;
+  margin-bottom: 40px;
 }

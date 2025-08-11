@@ -27,7 +27,7 @@
         <div class="facade-card">
           <a href="{% url 'facade_detail' facade.id %}">
             <img src="{{ facade.main_image }}" alt="{{ facade.title }}" class="facade-img">
-            <div class="facade-title">{{ facade.title }}</div>
+            <div class="facade-title">{{ forloop.counter }}</div>
           </a>
         </div>
       {% empty %}
