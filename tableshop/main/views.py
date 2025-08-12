@@ -90,8 +90,17 @@ def garder_detail(request, pk):
         'product_type': 'Гардеробные',
     })
 def facades(request):
-    facades = Facade.objects.all()
-    return render(request, 'main/facades.html', {'facades': facades})
+    types = Facade.objects.values_list('type', flat=True).distinct()
+    selected_type = request.GET.get('type')
+    if selected_type and selected_type != 'all':
+        facades = Facade.objects.filter(type=selected_type)
+    else:
+        facades = Facade.objects.all()
+    return render(request, 'main/facades.html', {
+        'facades': facades,
+        'types': types,
+        'selected_type': selected_type,
+    })
 def facade_detail(request, pk):
     facade = get_object_or_404(Facade, pk=pk)
     return render(request, 'main/facade_detail.html', {'facade': facade})

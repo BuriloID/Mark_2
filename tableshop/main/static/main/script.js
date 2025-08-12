@@ -213,3 +213,8 @@ function closePopup() {
   document.getElementById('callback-popup').style.display = 'none';
   clearTimeout(popupTimeout);
 }
+document.querySelectorAll('#facades-filter-form input[type=radio]').forEach((el) => {
+    el.addEventListener('change', function() {
+      this.form.submit();
+    });
+  });

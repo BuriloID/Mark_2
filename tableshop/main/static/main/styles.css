@@ -1532,3 +1532,111 @@
   font-size: 18px;
   margin-bottom: 40px;
 }
+.facades-page {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.facades-filter {
+    position: sticky;
+    top: 32px;
+  min-width: 240px;
+  max-width: 260px;
+  background: #fafafa;
+  padding: 24px 20px 20px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  margin-top: 32px;
+}
+
+.filter-block {
+  margin-bottom: 24px;
+}
+
+.filter-title {
+  font-weight: bold;
+  font-size: 1.08em;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
+.filter-radio {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  gap: 7px;
+}
+
+.filter-btn {
+  margin-top: 10px;
+  padding: 7px 18px;
+  border-radius: 4px;
+  border: none;
+  background: #2e7d32;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.filter-btn:hover {
+  background: #256324;
+}
+
+.facades-list {
+  flex: 1 1 0;
+}
+@media (max-width: 1024px) {
+  .facades-page {
+    gap: 16px;
+  }
+
+  .facades-filter {
+    min-width: 180px;
+    max-width: 200px;
+    padding: 16px 10px;
+    margin-top: 16px;
+  }
+  .facades-grid {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .facades-page {
+    flex-direction: column;
+    gap: 0;
+  }
+  .facades-filter {
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+    margin: 0 0 16px 0;
+    border-radius: 8px;
+    box-shadow: none;
+    padding: 12px 8px;
+  }
+  .facades-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .facades-filter {
+    padding: 6px 4px;
+    font-size: 0.98em;
+  }
+  .filter-title {
+    font-size: 1em;
+  }
+  .facades-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .facade-title {
+    font-size: 1em;
+  }
+}

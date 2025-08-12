@@ -21,18 +21,40 @@
       </p>
     </div>
   </section>
-  <section class="facades-list">
-    <div class="facades-grid">
-      {% for facade in facades %}
-        <div class="facade-card">
-          <a href="{% url 'facade_detail' facade.id %}">
-            <img src="{{ facade.main_image }}" alt="{{ facade.title }}" class="facade-img">
-            <div class="facade-title">{{ forloop.counter }}</div>
-          </a>
-        </div>
-      {% empty %}
-        <p>Фасады пока не добавлены.</p>
-      {% endfor %}
-    </div>
-  </section>
+
+  <div class="facades-page">
+  <aside class="facades-filter">
+    <form method="get" id="facades-filter-form">
+      <div class="filter-block">
+        <div class="filter-title">Вид массива</div>
+        <label class="filter-radio">
+          <input type="radio" name="type" value="all" {% if not selected_type or selected_type == "all" %}checked{% endif %}>
+          <span>Все</span>
+        </label>
+        {% for t in types %}
+          <label class="filter-radio">
+            <input type="radio" name="type" value="{{ t }}" {% if selected_type == t %}checked{% endif %}>
+            <span>{{ t }}</span>
+          </label>
+        {% endfor %}
+      </div>
+      </form>
+    </aside>
+
+    <!-- Сетка фасадов -->
+    <section class="facades-list">
+      <div class="facades-grid">
+        {% for facade in facades %}
+          <div class="facade-card">
+            <a href="{% url 'facade_detail' facade.id %}">
+              <img src="{{ facade.main_image }}" alt="{{ facade.title }}" class="facade-img">
+              <div class="facade-title">{{ facade.title }}</div>
+            </a>
+          </div>
+        {% empty %}
+          <p>Фасады пока не добавлены.</p>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
 {% endblock %}
