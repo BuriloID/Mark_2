@@ -1442,7 +1442,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 36px 40px;
-  margin: 40px 0 24px 0;
+  margin: 40px 0 0px 0;
 }
 .facade-card {
   width: 320px;
@@ -1544,8 +1544,8 @@
   min-width: 240px;
   max-width: 260px;
   background: #fafafa;
-  padding: 24px 20px 20px 20px;
-  border-radius: 12px;
+  padding: 24px 0px 0px 20px;
+  border-radius: 6px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   margin-top: 32px;
 }
@@ -1568,21 +1568,6 @@
   font-size: 1em;
   cursor: pointer;
   gap: 7px;
-}
-
-.filter-btn {
-  margin-top: 10px;
-  padding: 7px 18px;
-  border-radius: 4px;
-  border: none;
-  background: #2e7d32;
-  color: #fff;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.filter-btn:hover {
-  background: #256324;
 }
 
 .facades-list {
