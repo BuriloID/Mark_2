@@ -1,0 +1,79 @@
+{% extends "main/base.html" %}
+{% block title %}О нас{% endblock %}
+
+{% block content %}
+  <div class="contacts-hero">
+    <div class="contacts-breadcrumbs">
+        <a href="/" class="contacts-breadcrumbs-home">Premier Fasad</a>
+        <span class="contacts-breadcrumbs-sep">/</span>
+        <span>О Нас</span>
+    </div>
+    <section class="cat-hero">
+    <div class="cat-hero-bg-main" style="background-image: url('https://storage.yandexcloud.net/mark2/main_images/main_about.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+    <div class="cat-hero-content-main">
+        <p>
+             Мы гарантируем безупречное качество, долговечность и индивидуальность Вашей мебели!
+        </p>
+    </div>
+</section>
+    <section class="about-mpv-section">
+  <div class="about-mpv-content">
+      <b>Мебельная Мастерская MPV</b> более 20 лет предлагает свою продукцию на российском рынке.
+      Нашей основной сферой деятельности является производство и продажа мебельных фасадов из МДФ, массива и шпона для любой корпусной мебели: кухни, прихожие, шкафы-купе, ванные, гардеробные, лоджии и т.д. Помимо корпусной мебели мы предлагаем межкомнатные двери, стеновые панели, перегородки и многое другое, что позволит придать интерьеру единый и гармоничный вид.
+      Многообразие видов фрезеровок и широкая цветовая гамма красок позволяют реализовать множество идей. Изготовление фасадов возможно по любым эскизам и даже фото — изготовим качественно и быстро на самом передовом зарубежном оборудовании (в том числе на фрезерных станках с ЧПУ), используя только лучшие, натуральные и искусственные материалы. Мы умеем сочетать в одном изделии шпон дерева, металл, эмаль, кожу.
+      У нас нет СТАНДАРТОВ! Рабочий персонал компании — настоящие профессионалы, поэтому любой ваш заказ может быть изготовлен нашими специалистами как в полностью индивидуальном, эксклюзивном дизайне, так и в предварительно разработанных, стильных и запоминающихся <a href="{% url 'facades' %}" class="about-mpv-link">моделях</a>, которые также могут учитывать все ваши пожелания и потребности.
+  </div>
+</section>
+<section class="partners-section">
+  <h2>Наши партнёры</h2>
+  <div class="partners-logos">
+    <img src="https://storage.yandexcloud.net/mark2/partners/company1.jpg" alt="TriStone">
+    <img src="/static/img/partners/getacore.png" alt="GetaCore">
+    <img src="/static/img/partners/renner.png" alt="RENNER">
+    <img src="/static/img/partners/makmart.png" alt="MAK MART">
+    <img src="/static/img/partners/kronospan.png" alt="Kronospan">
+    <img src="/static/img/partners/rehau.png" alt="REHAU">
+    <img src="/static/img/partners/blum.png" alt="Blum">
+    <img src="/static/img/partners/boyard.png" alt="BOYARD">
+    <img src="/static/img/partners/arpa.png" alt="Arpa">
+    <img src="/static/img/partners/lg-himacs.png" alt="LG HI-MACS">
+    <img src="/static/img/partners/egger.png" alt="EGGER">
+    <img src="/static/img/partners/sayerlack.png" alt="SAYERLACK">
+    <img src="/static/img/partners/hettich.png" alt="Hettich">
+    <img src="/static/img/partners/aristo.png" alt="ARISTO">
+  </div>
+</section>
+  <section class="about-main">
+    <div class="about-block">
+      <h2>Кто мы?</h2>
+      <p>
+        Мы — команда профессионалов с опытом более 10 лет в сфере производства мебельных фасадов и корпусной мебели.<br>
+        Наши изделия украшают кухни, гардеробные и интерьеры по всей стране.
+      </p>
+    </div>
+    <div class="about-block">
+      <h2>Наши ценности</h2>
+      <ul>
+        <li>Экологичность и натуральные материалы</li>
+        <li>Современный дизайн и технологии</li>
+        <li>Индивидуальный подход к каждому заказу</li>
+        <li>Контроль качества на каждом этапе</li>
+      </ul>
+    </div>
+    <div class="about-block">
+      <h2>Почему выбирают нас?</h2>
+      <p>
+        <b>Собственное производство</b>, гибкая система работы с дизайнерами и архитекторами, доставка по всей России.<br>
+        Мы всегда открыты к диалогу и готовы воплотить ваши идеи!
+      </p>
+    </div>
+    <div class="about-block about-contacts">
+      <h2>Контакты</h2>
+      <p>
+        <b>Email:</b> info@вашдомен.ru<br>
+        <b>Телефон:</b> +7 (999) 123-45-67<br>
+        <b>Адрес производства:</b> г. Москва, ул. Примерная, д.1
+      </p>
+    </div>
+  </section>
+{% endblock %}

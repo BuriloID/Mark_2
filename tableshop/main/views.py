@@ -104,3 +104,5 @@ def facades(request):
 def facade_detail(request, pk):
     facade = get_object_or_404(Facade, pk=pk)
     return render(request, 'main/facade_detail.html', {'facade': facade})
+def about(request):
+    return render(request, "main/about.html")
