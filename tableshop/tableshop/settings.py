@@ -9,11 +9,17 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+# settings.py (в начале файла, сразу после BASE_DIR)
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+
+BASE_DIR   = Path(__file__).resolve().parent.parent
+dotenv_path = BASE_DIR / '.env'
+
+load_dotenv(dotenv_path)
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,18 +43,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main',
+    'main', 
+    'storages',
 ]
-import os
 
-INSTALLED_APPS += ["storages"]
+
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 AWS_S3_ENDPOINT_URL = "https://storage.yandexcloud.net"
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = "kitchen-images"
+AWS_STORAGE_BUCKET_NAME = "mark2"
 AWS_S3_REGION_NAME = "ru-central1"
-AWS_S3_FILE_OVERWRITE = False
+AWS_S3_SIGNATURE_VERSION = 's3v4' 
+AWS_S3_ADDRESSING_STYLE  = 'path' 
 AWS_DEFAULT_ACL = None
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -218,3 +218,61 @@ document.querySelectorAll('#facades-filter-form input[type=radio]').forEach((el)
       this.form.submit();
     });
   });
+fetch('/api/gallery-images/')
+  .then(res => res.json())
+  .then(images => {
+    if (!galleryTrack || !images.length) return;
+    images.forEach((url, index) => {
+      const img = document.createElement("img");
+      img.src = url;
+      if (index === 0) img.classList.add("active");
+      galleryTrack.appendChild(img);
+    });
+  });
+
+const galleryTrack = document.getElementById("galleryTrack");
+const leftArrow = document.getElementById("galleryLeft");
+const rightArrow = document.getElementById("galleryRight");
+
+if (galleryTrack && galleryImages.length) {
+  galleryImages.forEach((url, index) => {
+    const img = document.createElement("img");
+    img.src = url;
+    if (index === 0) img.classList.add("active");
+    galleryTrack.appendChild(img);
+  });
+
+  // Центрирование активного изображения при скролле
+  galleryTrack.addEventListener("scroll", () => {
+    const images = galleryTrack.querySelectorAll("img");
+    let closest = null;
+    let closestDistance = Infinity;
+    const center = window.innerWidth / 2;
+
+    images.forEach(img => {
+      const rect = img.getBoundingClientRect();
+      const distance = Math.abs(rect.left + rect.width / 2 - center);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closest = img;
+      }
+    });
+
+    images.forEach(img => img.classList.remove("active"));
+    if (closest) closest.classList.add("active");
+  });
+
+  const scrollAmount = 320; 
+
+  if (leftArrow) {
+    leftArrow.addEventListener("click", () => {
+      galleryTrack.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+  }
+
+  if (rightArrow) {
+    rightArrow.addEventListener("click", () => {
+      galleryTrack.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+  }
+}

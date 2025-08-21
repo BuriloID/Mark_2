@@ -1,11 +1,61 @@
 import requests
+import boto3
 from django.shortcuts import render, get_object_or_404
 from .models import Kitchen, Garder, Facade
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from botocore.config import Config
+from django.views.decorators.http import require_GET
+from django.conf import settings
+
 
 TELEGRAM_TOKEN = '7632758284:AAGa3qFxnukMyHD194Ypduis0a2d8rHfcqw'
-TELEGRAM_CHAT_ID = '5208308918'  # например, 123456789
+TELEGRAM_CHAT_ID = '5208308918'  
+def disable_payload_signing(request, **kwargs):
+    # навсегда принудительно ставим UNSIGNED-PAYLOAD
+    request.context["payload_hash"] = "UNSIGNED-PAYLOAD"
+
+    # HTTPHeaders хранит ключи в lowercase и не имеет pop()
+    # удаляем хидер через del
+    header_name = "x-amz-content-sha256"
+    if header_name in request.headers:
+        del request.headers[header_name]
+
+@require_GET
+def get_gallery_images(request):
+    cfg = Config(
+        signature_version="s3v4",
+        region_name=settings.AWS_S3_REGION_NAME,
+        s3={
+            "addressing_style": "path",
+            "payload_signing_enabled": False,
+        }
+    )
+
+    client = boto3.client(
+        "s3",
+        endpoint_url=settings.AWS_S3_ENDPOINT_URL,
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        config=cfg,
+    )
+
+    # регистрируем хук именно для ListObjectsV2
+    client.meta.events.register("before-sign.s3.ListObjectsV2", disable_payload_signing)
+
+    paginator = client.get_paginator("list_objects_v2")
+    pages = paginator.paginate(
+        Bucket=settings.AWS_STORAGE_BUCKET_NAME,
+        Prefix="partners/"
+    )
+
+    urls = []
+    for page in pages:
+        for obj in page.get("Contents", []):
+            key = obj["Key"]
+            urls.append(f"{settings.AWS_S3_ENDPOINT_URL}/{settings.AWS_STORAGE_BUCKET_NAME}/{key}")
+
+    return JsonResponse(urls, safe=False)
 @csrf_exempt
 def send_to_telegram(request):
     if request.method == 'POST':

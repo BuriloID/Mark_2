@@ -10,6 +10,7 @@ urlpatterns = [
     path('kitchen/<int:pk>/', views.kitchen_detail, name='kitchen_detail'),
     path('garders/', views.garders, name='garders'),
     path('garders/<int:pk>/', views.garder_detail, name='garder_detail'),
+    path('api/gallery-images/', views.get_gallery_images, name='gallery-images'),
     path('send_to_telegram/', views.send_to_telegram, name='send_to_telegram'),
     path('send_callback_to_telegram/', views.send_callback_to_telegram, name='send_callback_to_telegram'),
     path('facades/<int:pk>/', views.facade_detail, name='facade_detail')
