@@ -1,12 +1,9 @@
 import requests
-import boto3
-from botocore.client import Config
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from .models import Kitchen, Garder, Facade
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from storages.backends.s3boto3 import S3Boto3Storage
 from django.views.decorators.http import require_GET
 
 
@@ -113,22 +110,6 @@ def facade_detail(request, pk):
 def about(request):
     return render(request, "main/about.html")
 def gallery_images(request):
-    partners_images = [
-        "https://storage.yandexcloud.net/mark2/partners/tristone.png",
-        "https://storage.yandexcloud.net/mark2/partners/proart.png",
-        "https://storage.yandexcloud.net/mark2/partners/renner.jpg",
-        "https://storage.yandexcloud.net/mark2/partners/makmart.png",
-        "https://storage.yandexcloud.net/mark2/partners/kronospan.png",
-        "https://storage.yandexcloud.net/mark2/partners/rehau.png",
-        "https://storage.yandexcloud.net/mark2/partners/blum.png",
-        "https://storage.yandexcloud.net/mark2/partners/mdm.png",
-        "https://storage.yandexcloud.net/mark2/partners/vibo.png",
-        "https://storage.yandexcloud.net/mark2/partners/boyard.png",
-        "https://storage.yandexcloud.net/mark2/partners/arpa.png",
-        "https://storage.yandexcloud.net/mark2/partners/hi-macs.png",
-        "https://storage.yandexcloud.net/mark2/partners/egger.png",
-        "https://storage.yandexcloud.net/mark2/partners/sayerlack.png",
-        "https://storage.yandexcloud.net/mark2/partners/hettich.png",
-        "https://storage.yandexcloud.net/mark2/partners/aristo.png",
-    ]
-    return JsonResponse({ "images": partners_images })
+    base_url = "https://storage.yandexcloud.net/mark2/product/"
+    partners_images = [f"{base_url}{i}.jpg" for i in range(1, 17)]
+    return JsonResponse({"images": partners_images})
