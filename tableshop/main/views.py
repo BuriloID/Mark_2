@@ -1,7 +1,7 @@
 import requests
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404
-from main.models import Kitchen, Garder, Facade
+from .models import Kitchen, Garder, Facade
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
