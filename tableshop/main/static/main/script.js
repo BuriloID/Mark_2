@@ -218,61 +218,55 @@ document.querySelectorAll('#facades-filter-form input[type=radio]').forEach((el)
       this.form.submit();
     });
   });
-fetch('/api/gallery-images/')
-  .then(res => res.json())
-  .then(images => {
-    if (!galleryTrack || !images.length) return;
-    images.forEach((url, index) => {
-      const img = document.createElement("img");
-      img.src = url;
-      if (index === 0) img.classList.add("active");
-      galleryTrack.appendChild(img);
+document.addEventListener('DOMContentLoaded', () => {
+  const track      = document.getElementById('galleryTrack');
+  const prevBtn    = document.getElementById('galleryLeft');
+  const nextBtn    = document.getElementById('galleryRight');
+  let   images     = [];
+  let   current    = 0;
+
+  fetch('/api/gallery-images/')
+    .then(res => res.json())
+    .then(({ images: imgs }) => {
+      images = imgs;
+      imgs.forEach((url, i) => {
+        const img = document.createElement('img');
+        img.src = url;
+        img.className = 'gallery-item' + (i === 0 ? ' active' : '');
+        img.loading = 'lazy';
+        img.alt = `Партнёр ${i+1}`;
+        track.append(img);
+      });
+      scrollToActive();
+    })
+    .catch(console.error);
+
+  function updateActive() {
+    const nodes = track.querySelectorAll('.gallery-item');
+    nodes.forEach((img, i) => {
+      img.classList.toggle('active', i === current);
     });
-  });
-
-const galleryTrack = document.getElementById("galleryTrack");
-const leftArrow = document.getElementById("galleryLeft");
-const rightArrow = document.getElementById("galleryRight");
-
-if (galleryTrack && galleryImages.length) {
-  galleryImages.forEach((url, index) => {
-    const img = document.createElement("img");
-    img.src = url;
-    if (index === 0) img.classList.add("active");
-    galleryTrack.appendChild(img);
-  });
-
-  // Центрирование активного изображения при скролле
-  galleryTrack.addEventListener("scroll", () => {
-    const images = galleryTrack.querySelectorAll("img");
-    let closest = null;
-    let closestDistance = Infinity;
-    const center = window.innerWidth / 2;
-
-    images.forEach(img => {
-      const rect = img.getBoundingClientRect();
-      const distance = Math.abs(rect.left + rect.width / 2 - center);
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closest = img;
-      }
-    });
-
-    images.forEach(img => img.classList.remove("active"));
-    if (closest) closest.classList.add("active");
-  });
-
-  const scrollAmount = 320; 
-
-  if (leftArrow) {
-    leftArrow.addEventListener("click", () => {
-      galleryTrack.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    });
+    scrollToActive();
   }
 
-  if (rightArrow) {
-    rightArrow.addEventListener("click", () => {
-      galleryTrack.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  function scrollToActive() {
+    const active = track.querySelector('.gallery-item.active');
+    if (!active) return;
+    active.scrollIntoView({ 
+      behavior: 'smooth', 
+      inline: 'center', 
+      block: 'nearest' 
     });
   }
-}
+  prevBtn.addEventListener('click', () => {
+    if (!images.length) return;
+    current = (current - 1 + images.length) % images.length;
+    updateActive();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (!images.length) return;
+    current = (current + 1) % images.length;
+    updateActive();
+  });
+});

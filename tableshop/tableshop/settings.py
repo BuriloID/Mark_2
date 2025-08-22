@@ -19,7 +19,8 @@ from dotenv import load_dotenv
 BASE_DIR   = Path(__file__).resolve().parent.parent
 dotenv_path = BASE_DIR / '.env'
 
-load_dotenv(dotenv_path)
+from dotenv import load_dotenv
+load_dotenv(override=True)
 
 
 # Quick-start development settings - unsuitable for production
@@ -55,7 +56,6 @@ AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = "mark2"
 AWS_S3_REGION_NAME = "ru-central1"
 AWS_S3_SIGNATURE_VERSION = 's3v4' 
-AWS_S3_ADDRESSING_STYLE  = 'path' 
 AWS_DEFAULT_ACL = None
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
