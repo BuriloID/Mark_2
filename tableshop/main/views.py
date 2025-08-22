@@ -113,3 +113,7 @@ def gallery_images(request):
     base_url = "https://storage.yandexcloud.net/mark2/product/"
     product_images = [f"{base_url}{i}.jpg" for i in range(1, 66)]
     return JsonResponse({"images": product_images})
+def gallery_craft_images(request):
+    base_url = "https://storage.yandexcloud.net/mark2/craft/"
+    craft_images = [f"{base_url}{i}.jpg" for i in range(1, 90)]
+    return JsonResponse({"images": craft_images})

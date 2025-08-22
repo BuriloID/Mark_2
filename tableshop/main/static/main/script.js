@@ -4,6 +4,14 @@ const slides = document.getElementsByClassName('slide');
 const dotsContainer = document.getElementById('slider-dots');
 const slider = document.querySelector('.slider');
 
+function copyPhone() {
+    const phone = '+7 (916) 715-99-55';
+    navigator.clipboard.writeText(phone).then(() => {
+      alert('Телефон скопирован: ' + phone);
+    }).catch(err => {
+      console.error('Не удалось скопировать телефон: ', err);
+    });
+  }
 function showSlide(n) {
     if (!slides.length) return;
     slideIndex = (n + slides.length) % slides.length;
@@ -312,3 +320,58 @@ document.addEventListener('DOMContentLoaded', () => {
     track.scrollLeft = scrollLeft - walk;
   });
 });
+document.addEventListener('DOMContentLoaded', () => {
+  const mosaicContainer = document.getElementById('mosaic'); 
+  const loadMoreBtn = document.querySelector('.load-more');
+  if (!mosaicContainer || !loadMoreBtn) return;
+
+  let allImages = [];
+  let loadedCount = 0;
+  const perLoad = 12;
+
+  fetch('/api/gallery_craft_images/')
+    .then(res => res.json())
+    .then(data => {
+      allImages = data.images;
+      loadMoreMosaic(); 
+    })
+    .catch(console.error);
+
+  function loadMoreMosaic() {
+    const nextImages = allImages.slice(loadedCount, loadedCount + perLoad);
+    nextImages.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = 'mosaic-item';
+      img.loading = 'lazy';
+      mosaicContainer.appendChild(img);
+    });
+    loadedCount += nextImages.length;
+
+    if (loadedCount >= allImages.length) {
+      loadMoreBtn.style.display = 'none';
+    }
+  }
+
+  loadMoreBtn.addEventListener('click', loadMoreMosaic);
+});
+function loadMoreMosaic() {
+  const nextImages = allImages.slice(loadedCount, loadedCount + perLoad);
+  nextImages.forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.className = 'mosaic-item';
+    img.loading = 'lazy';
+
+    img.addEventListener('load', () => {
+      img.classList.add('loaded');
+    });
+
+    mosaicContainer.appendChild(img);
+  });
+  loadedCount += nextImages.length;
+
+  if (loadedCount >= allImages.length) {
+    loadMoreBtn.style.display = 'none';
+  }
+}

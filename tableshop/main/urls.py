@@ -6,6 +6,7 @@ urlpatterns = [
     path('contacts/', views.contacts, name='contacts'),
     path('about/', views.about, name='about'),
     path('api/gallery-images/', views.gallery_images, name='gallery_images'),
+    path('api/gallery_craft_images/', views.gallery_craft_images, name='gallery_craft_images'),
     path('kitchen/', views.kitchen, name='kitchen'),
     path('facades/', views.facades, name='facades'),
     path('kitchen/<int:pk>/', views.kitchen_detail, name='kitchen_detail'),
