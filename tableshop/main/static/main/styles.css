@@ -1728,22 +1728,30 @@
   overflow-y: visible;       
   position: relative;
 }
-
+.gallery-item {
+  -webkit-user-drag: none; 
+  user-select: none;       
+}
 .gallery-track {
   display: flex;
   gap: 40px;
+  cursor: grab;
   overflow-x: auto;
   overflow-y: clip;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   padding: 40px 20px;          
 }
-
+.gallery-track.dragging {
+  cursor: grabbing;
+}
 .gallery-track img {
+  width: 300px;   
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
   flex: 0 0 auto;
-  width: 250px;
   aspect-ratio: 3 / 2;
-  object-fit: contain;
   background: #fff;
   border-radius: 8px;
   opacity: 0.5;
@@ -1805,4 +1813,10 @@
     width: 32px;
     height: 32px;
   }
+}
+.gallery-title {
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 0 7px;
 }

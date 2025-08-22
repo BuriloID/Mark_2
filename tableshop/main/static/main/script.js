@@ -231,13 +231,20 @@ document.addEventListener('DOMContentLoaded', () => {
       images = imgs;
       imgs.forEach((url, i) => {
         const img = document.createElement('img');
-        img.src = url;
-        img.className = 'gallery-item' + (i === 0 ? ' active' : '');
-        img.loading = 'lazy';
-        img.alt = `Партнёр ${i+1}`;
+        img.src       = url;
+        img.className = 'gallery-item';
+        img.alt       = `Партнёр ${i+1}`;
+        img.loading   = 'lazy';
+        if (i === 0) img.classList.add('active');
+        img.addEventListener('click', () => {
+          current = i;
+          updateActive();
+        });
+
         track.append(img);
       });
-      scrollToActive();
+
+      updateActive();
     })
     .catch(console.error);
 
@@ -268,5 +275,40 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!images.length) return;
     current = (current + 1) % images.length;
     updateActive();
+  });
+  let isDown     = false;
+  let startX     = 0;
+  let scrollLeft = 0;
+
+  track.addEventListener('mousedown', (e) => {
+    isDown     = true;
+    track.classList.add('dragging');  
+    startX     = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  track.addEventListener('mouseleave', () => {
+    isDown = false;
+    track.classList.remove('dragging');
+  });
+  track.addEventListener('mouseup', () => {
+    isDown = false;
+    track.classList.remove('dragging');
+  });
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x    = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 4;       
+    track.scrollLeft = scrollLeft - walk;
+  });
+
+  track.addEventListener('touchstart', (e) => {
+    startX     = e.touches[0].pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+  track.addEventListener('touchmove', (e) => {
+    const x    = e.touches[0].pageX - track.offsetLeft;
+    const walk = (x - startX) * 1;
+    track.scrollLeft = scrollLeft - walk;
   });
 });

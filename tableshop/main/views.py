@@ -111,5 +111,5 @@ def about(request):
     return render(request, "main/about.html")
 def gallery_images(request):
     base_url = "https://storage.yandexcloud.net/mark2/product/"
-    partners_images = [f"{base_url}{i}.jpg" for i in range(1, 17)]
-    return JsonResponse({"images": partners_images})
+    product_images = [f"{base_url}{i}.jpg" for i in range(1, 66)]
+    return JsonResponse({"images": product_images})
