@@ -92,9 +92,21 @@ WSGI_APPLICATION = 'tableshop.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-DATABASES = {
-    "default": dj_database_url.config(default=os.getenv("DATABASE_URL"))
-}
+if os.getenv("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.config(conn_max_age=600, ssl_require=True)
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "prfasad",
+            "USER": "postgres",
+            "PASSWORD": "12345678",
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
+    }
 #DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.postgresql',
