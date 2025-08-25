@@ -82,8 +82,8 @@ def kitchen_detail(request, pk):
         'product_type': 'Кухни',
     })
 def garders(request):
-    garders = Garder.objects.all()
-    return render(request, 'main/garders.html', {'garders': garders})
+    # garders = Garder.objects.all()
+    return render(request, 'main/garders.html')
 def garder_detail(request, pk):
     garder = get_object_or_404(Garder, pk=pk)
     images = garder.images.all() 
@@ -92,6 +92,9 @@ def garder_detail(request, pk):
         'images': images,
         'product_type': 'Гардеробные',
     })
+def bath(request):
+    bath = Garder.objects.all()
+    return render(request, 'main/bath.html', {'garders': garders})
 def facades(request):
     types = Facade.objects.values_list('type', flat=True).distinct()
     selected_type = request.GET.get('type')

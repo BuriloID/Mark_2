@@ -1,11 +1,12 @@
 {% extends "main/base.html" %}
-{% block title %}Главная страница{% endblock %}
+{% block title %}Кухни{% endblock %}
 
 {% block content %}
   <nav class="kitchen-nav" id="kitchenNav">
     <ul>
       <li class="active"><a href="{% url 'kitchen' %}">Кухни</a></li>
       <li><a href="{% url 'garders' %}">Гардеробные</a></li>
+      <li><a href="{% url 'bath' %}">Мебель для ванны</a></li>
       <li><a href="{% url 'facades' %}">Фасады</a></li>
       <li><a href="#">Дополнительные элементы</a></li>
     </ul>

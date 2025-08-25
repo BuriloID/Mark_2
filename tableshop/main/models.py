@@ -34,6 +34,29 @@ class GarderImage(models.Model):
 
     def __str__(self):
         return f"Фото для {self.garder.title}"
+class Bath(models.Model):
+    title = models.CharField("Название ванной", max_length=200)
+    main_image = models.ImageField("Главное изображение", upload_to="bath/main/")
+    size = models.CharField("Размер шкафа на фото", max_length=100)
+    corpus = models.CharField("Корпус", max_length=200)
+    mdf_thickness = models.CharField("Толщина МДФ", max_length=100)
+    drilling = models.CharField("Присадка", max_length=200)
+
+    def __str__(self):
+        return self.title
+
+
+class BathImage(models.Model):
+    bath = models.ForeignKey(
+        Bath,
+        on_delete=models.CASCADE,
+        related_name="images",
+        verbose_name="Ванная"
+    )
+    image = models.ImageField("Дополнительное изображение", upload_to="bath/additional/")
+
+    def __str__(self):
+        return f"Фото для {self.bath.title}"
 
 class Facade(models.Model):
     title = models.CharField(max_length=255)

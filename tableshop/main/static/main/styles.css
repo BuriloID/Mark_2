@@ -1413,6 +1413,7 @@
     font-family: inherit;
     line-height: 1;
 }
+
 .product-thumbnails {
   display: flex;
   flex-direction: column;

@@ -45,6 +45,13 @@
                 <a href="{% url 'garders' %}" class="slider-btn">Гардеробные</a>
             </div>
         </div>
+        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1588776814546-ec7f2d3b75b7?auto=format&fit=crop&w=900&q=80');">
+            <div class="slide-content">
+                <h2>Мебель для ванной</h2>
+                <p>Функциональные решения и современный дизайн</p>
+                <a href="{% url 'bath' %}" class="slider-btn">В каталог мебели для ванной</a>
+            </div>
+        </div>
         <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=900&q=80')">
             <div class="slide-content">
                 <h2>Фасады любой сложности</h2>
@@ -74,6 +81,18 @@
             </div>
             <div class="assortment-name">Кухни</div>
         </a>
+        <a href="{% url 'bath' %}" class="assortment-item">
+        <div class="assortment-icon">
+            <!-- SVG-иконка ванной -->
+            <svg width="64" height="64" viewBox="0 0 64 64">
+                <rect x="12" y="28" width="40" height="20" rx="4" ry="4" fill="none" stroke="#444" stroke-width="2"/>
+                <line x1="16" y1="48" x2="16" y2="56" stroke="#444" stroke-width="2"/>
+                <line x1="48" y1="48" x2="48" y2="56" stroke="#444" stroke-width="2"/>
+                <circle cx="22" cy="36" r="2" fill="#444"/>
+            </svg>
+        </div>
+        <div class="assortment-name">Мебель для ванной</div>
+    </a>
         <a href="{% url 'facades' %}" class="assortment-item">
             <div class="assortment-icon">
                 <!-- SVG-иконка фасада -->
