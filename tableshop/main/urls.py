@@ -15,5 +15,6 @@ urlpatterns = [
     path('send_to_telegram/', views.send_to_telegram, name='send_to_telegram'),
     path('send_callback_to_telegram/', views.send_callback_to_telegram, name='send_callback_to_telegram'),
     path('facades/<int:pk>/', views.facade_detail, name='facade_detail'),
-    path('bath/', views.bath, name='bath')
+    path('bath/', views.bath, name='bath'),
+    path('bath/<int:pk>/', views.bath_detail, name='bath_detail'),
 ]

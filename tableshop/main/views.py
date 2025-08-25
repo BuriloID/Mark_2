@@ -1,10 +1,9 @@
 import requests
-from django.conf import settings
 from django.shortcuts import render, get_object_or_404
-from .models import Kitchen, Garder, Facade
+from .models import Kitchen, Garder, Facade, Bath
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from django.views.decorators.http import require_GET
+
 
 
 TELEGRAM_TOKEN = '7632758284:AAGa3qFxnukMyHD194Ypduis0a2d8rHfcqw'
@@ -82,8 +81,8 @@ def kitchen_detail(request, pk):
         'product_type': 'Кухни',
     })
 def garders(request):
-    # garders = Garder.objects.all()
-    return render(request, 'main/garders.html')
+    garders = Garder.objects.all()
+    return render(request, 'main/garders.html', {'garders': garders})
 def garder_detail(request, pk):
     garder = get_object_or_404(Garder, pk=pk)
     images = garder.images.all() 
@@ -93,8 +92,16 @@ def garder_detail(request, pk):
         'product_type': 'Гардеробные',
     })
 def bath(request):
-    bath = Garder.objects.all()
-    return render(request, 'main/bath.html', {'garders': garders})
+    baths = Bath.objects.all()
+    return render(request, 'main/bath.html', {'baths': baths})
+def bath_detail(request, pk):
+    bath = get_object_or_404(Bath, pk=pk)
+    images = bath.images.all() 
+    return render(request, 'main/bath_detail.html', {
+        'bath': bath,
+        'images': images,
+        'product_type': 'Мебель для ванной',
+    })
 def facades(request):
     types = Facade.objects.values_list('type', flat=True).distinct()
     selected_type = request.GET.get('type')

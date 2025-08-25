@@ -12,29 +12,30 @@
     </ul>
   </nav>
   <section class="cat-hero">
-    <div class="cat-hero-bg" style="background-image: url('https://storage.yandexcloud.net/mark2/main_images/slide_garders.png'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+    <div class="cat-hero-bg" style="background-image: url('https://storage.yandexcloud.net/mark2/main_images/slide_bath.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
     <div class="cat-hero-content">
-      <h1>Гардеробные</h1>
-      <p>
-        Здесь вы найдёте лучшие решения для хранения вещей, которые подойдут для любого интерьера.<br>
-        Индивидуальные проекты, современные материалы и безупречное качество исполнения.
-      </p>
+      <h1>Мебель для ванных комнат</h1>
+<p>
+  Создаём стильную и функциональную мебель для вашей ванной. <br>
+  Эргономичные шкафы, современные материалы и аккуратная отделка помогут организовать пространство и подчеркнуть дизайн интерьера. <br>
+  Индивидуальные решения для любых размеров и стилей ванной комнаты.
+</p>
     </div>
   </section>
  <section class="kitchen-list-section">
     <div class="kitchen-list">
-      {% for garder in garders %}
+      {% for bath in baths %}
         <div class="kitchen-card">
           <div class="kitchen-card-image-wrapper">
-            {% if garder.main_image %}
-              <a class="kitchen-card-image-link" href="{% url 'garder_detail' garder.id %}">
-                <img src="{{ garder.main_image }}" alt="Гардеробная {{ garder.title }}">
+            {% if bath.main_image %}
+              <a class="kitchen-card-image-link" href="{% url 'bath_detail' bath.id %}">
+                <img src="{{ bath.main_image }}" alt="Мебель для ванной {{ bath.title }}">
               </a>
             {% else %}
               <div class="no-photo">Нет фото</div>
             {% endif %}
           </div>
-          <div class="kitchen-title">№ {{ garder.title }}</div>
+          <div class="kitchen-title">№ {{ bath.title }}</div>
         </div>
       {% endfor %}
     </div>
