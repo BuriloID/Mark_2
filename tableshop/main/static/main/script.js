@@ -227,158 +227,155 @@ document.querySelectorAll('#facades-filter-form input[type=radio]').forEach((el)
     });
   });
 document.addEventListener('DOMContentLoaded', () => {
-  const track      = document.getElementById('galleryTrack');
-  const prevBtn    = document.getElementById('galleryLeft');
-  const nextBtn    = document.getElementById('galleryRight');
-  let   images     = [];
-  let   current    = 0;
+  const track = document.getElementById('galleryTrack');
+  const prevBtn = document.getElementById('galleryLeft');
+  const nextBtn = document.getElementById('galleryRight');
 
-  fetch('/api/gallery-images/')
-    .then(res => res.json())
-    .then(({ images: imgs }) => {
-      images = imgs;
-      imgs.forEach((url, i) => {
-        const img = document.createElement('img');
-        img.src       = url;
-        img.className = 'gallery-item';
-        img.alt       = `Партнёр ${i+1}`;
-        img.loading   = 'lazy';
-        if (i === 0) img.classList.add('active');
-        img.addEventListener('click', () => {
-          current = i;
-          updateActive();
+  if (track) {
+    let images = [];
+    let current = 0;
+
+    fetch('/api/gallery-images/')
+      .then(res => res.json())
+      .then(({ images: imgs }) => {
+        images = imgs;
+        imgs.forEach((url, i) => {
+          const img = document.createElement('img');
+          img.src = url;
+          img.className = 'gallery-item';
+          img.alt = `Партнёр ${i + 1}`;
+          img.loading = 'lazy';
+          if (i === 0) img.classList.add('active');
+          img.addEventListener('click', () => {
+            current = i;
+            updateActive();
+          });
+          track.append(img);
         });
+        updateActive();
+      })
+      .catch(console.error);
 
-        track.append(img);
+    function updateActive() {
+      const nodes = track.querySelectorAll('.gallery-item');
+      nodes.forEach((img, i) => {
+        img.classList.toggle('active', i === current);
       });
+      scrollToActive();
+    }
 
-      updateActive();
-    })
-    .catch(console.error);
+    function scrollToActive() {
+      const active = track.querySelector('.gallery-item.active');
+      if (active) {
+        active.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        });
+      }
+    }
 
-  function updateActive() {
-    const nodes = track.querySelectorAll('.gallery-item');
-    nodes.forEach((img, i) => {
-      img.classList.toggle('active', i === current);
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (!images.length) return;
+        current = (current - 1 + images.length) % images.length;
+        updateActive();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (!images.length) return;
+        current = (current + 1) % images.length;
+        updateActive();
+      });
+    }
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      track.classList.add('dragging');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
     });
-    scrollToActive();
-  }
 
-  function scrollToActive() {
-    const active = track.querySelector('.gallery-item.active');
-    if (!active) return;
-    active.scrollIntoView({ 
-      behavior: 'smooth', 
-      inline: 'center', 
-      block: 'nearest' 
+    track.addEventListener('mouseleave', () => {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+
+    track.addEventListener('mouseup', () => {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 4;
+      track.scrollLeft = scrollLeft - walk;
+    });
+
+    track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('touchmove', (e) => {
+      const x = e.touches[0].pageX - track.offsetLeft;
+      const walk = (x - startX) * 1;
+      track.scrollLeft = scrollLeft - walk;
     });
   }
-  prevBtn.addEventListener('click', () => {
-    if (!images.length) return;
-    current = (current - 1 + images.length) % images.length;
-    updateActive();
-  });
-
-  nextBtn.addEventListener('click', () => {
-    if (!images.length) return;
-    current = (current + 1) % images.length;
-    updateActive();
-  });
-  let isDown     = false;
-  let startX     = 0;
-  let scrollLeft = 0;
-
-  track.addEventListener('mousedown', (e) => {
-    isDown     = true;
-    track.classList.add('dragging');  
-    startX     = e.pageX - track.offsetLeft;
-    scrollLeft = track.scrollLeft;
-  });
-  track.addEventListener('mouseleave', () => {
-    isDown = false;
-    track.classList.remove('dragging');
-  });
-  track.addEventListener('mouseup', () => {
-    isDown = false;
-    track.classList.remove('dragging');
-  });
-  track.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x    = e.pageX - track.offsetLeft;
-    const walk = (x - startX) * 4;       
-    track.scrollLeft = scrollLeft - walk;
-  });
-
-  track.addEventListener('touchstart', (e) => {
-    startX     = e.touches[0].pageX - track.offsetLeft;
-    scrollLeft = track.scrollLeft;
-  });
-  track.addEventListener('touchmove', (e) => {
-    const x    = e.touches[0].pageX - track.offsetLeft;
-    const walk = (x - startX) * 1;
-    track.scrollLeft = scrollLeft - walk;
-  });
 });
+
 document.addEventListener('DOMContentLoaded', () => {
-  const mosaicContainer = document.getElementById('mosaic'); 
+  const mosaicContainer = document.getElementById('mosaic');
   const loadMoreBtn = document.querySelector('.load-more');
-  if (!mosaicContainer || !loadMoreBtn) return;
 
-  let allImages = [];
-  let loadedCount = 0;
-  const perLoad = 12;
+  if (mosaicContainer && loadMoreBtn) {
+    let allImages = [];
+    let loadedCount = 0;
+    const perLoad = 12;
 
-  fetch('/api/gallery_craft_images/')
-    .then(res => res.json())
-    .then(data => {
-      allImages = data.images;
-      loadMoreMosaic(); 
-    })
-    .catch(console.error);
+    fetch('/api/gallery_craft_images/')
+      .then(res => res.json())
+      .then(data => {
+        allImages = data.images;
+        loadMoreMosaic();
+      })
+      .catch(console.error);
 
-  function loadMoreMosaic() {
-    const nextImages = allImages.slice(loadedCount, loadedCount + perLoad);
-    nextImages.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.className = 'mosaic-item';
-      img.loading = 'lazy';
-      mosaicContainer.appendChild(img);
-    });
-    loadedCount += nextImages.length;
+    function loadMoreMosaic() {
+      const nextImages = allImages.slice(loadedCount, loadedCount + perLoad);
+      nextImages.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'mosaic-item';
+        img.loading = 'lazy';
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+        });
+        mosaicContainer.appendChild(img);
+      });
+      loadedCount += nextImages.length;
 
-    if (loadedCount >= allImages.length) {
-      loadMoreBtn.style.display = 'none';
+      if (loadedCount >= allImages.length) {
+        loadMoreBtn.style.display = 'none';
+      }
     }
-  }
 
-  loadMoreBtn.addEventListener('click', loadMoreMosaic);
+    loadMoreBtn.addEventListener('click', loadMoreMosaic);
+  }
 });
-function loadMoreMosaic() {
-  const nextImages = allImages.slice(loadedCount, loadedCount + perLoad);
-  nextImages.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.className = 'mosaic-item';
-    img.loading = 'lazy';
 
-    img.addEventListener('load', () => {
-      img.classList.add('loaded');
-    });
-
-    mosaicContainer.appendChild(img);
-  });
-  loadedCount += nextImages.length;
-
-  if (loadedCount >= allImages.length) {
-    loadMoreBtn.style.display = 'none';
+window.addEventListener("load", function () {
+  const loader = document.getElementById("page-loader");
+  if (loader) {
+    setTimeout(() => loader.classList.add("hidden"), 2000);
   }
-}
-window.addEventListener("load", function() {
-    const loader = document.getElementById("page-loader");
-    if (loader) {
-        // показываем спиннер минимум 2 секунды
-        setTimeout(() => loader.classList.add("hidden"), 2000);
-    }
 });
