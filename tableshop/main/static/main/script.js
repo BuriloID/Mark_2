@@ -375,3 +375,10 @@ function loadMoreMosaic() {
     loadMoreBtn.style.display = 'none';
   }
 }
+window.addEventListener("load", function() {
+    const loader = document.getElementById("page-loader");
+    if (loader) {
+        // показываем спиннер минимум 2 секунды
+        setTimeout(() => loader.classList.add("hidden"), 2000);
+    }
+});
