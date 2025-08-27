@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="https://storage.yandexcloud.net/mark2/mm_logo.svg" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Главная{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'main/styles.css' %}">
 </head>
@@ -13,10 +15,20 @@
 <body>
     <header class="site-header">
     <div class="navbar">
+        <label class="hamburger">
+            <input type="checkbox" aria-label="Открыть меню" />
+                <svg viewBox="0 0 32 32">
+                    <path
+                    d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"
+                    class="line line-top-bottom"
+                    ></path>
+                    <path d="M7 16 27 16" class="line"></path>
+                </svg>
+        </label>
         <a href="/" class="logo">
             <img src="https://storage.yandexcloud.net/mark2/mm_logo.svg" alt="FacadeArt" />
         </a>
-        <nav>
+        <nav id="main-nav">
             <ul class="nav-menu">
                 <li class="menu-dropdown">
                     <button class="dropdown-btn">Каталог <span class="arrow">&#9662;</span></button>

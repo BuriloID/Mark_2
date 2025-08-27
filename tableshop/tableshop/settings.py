@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key')
 #SECRET_KEY = 'django-insecure-5-6ft@ybfem5+a_=$4qj%a!b!q6%igcum9pwldr#1b#p!o#al)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 

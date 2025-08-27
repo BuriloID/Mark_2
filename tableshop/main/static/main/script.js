@@ -372,3 +372,45 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMoreBtn.addEventListener('click', loadMoreMosaic);
   }
 });
+const hamburger = document.querySelector('.hamburger input');
+const nav = document.getElementById('main-nav');
+hamburger.addEventListener('change', () => {
+    nav.classList.toggle('active', hamburger.checked);
+});
+document.querySelectorAll('.menu-dropdown > .dropdown-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    const parent = btn.parentElement;
+    document.querySelectorAll('.menu-dropdown').forEach(drop => {
+      if (drop !== parent) drop.classList.remove('open');
+    });
+    parent.classList.toggle('open');
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const burger = document.querySelector('.burger-btn');
+  const dropdown = document.querySelector('.menu-dropdown');
+  const dropdownBtn = document.querySelector('.menu-dropdown .dropdown-btn');
+
+  burger?.addEventListener('click', () => {
+    const open = document.body.classList.toggle('nav-open');
+    burger.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  dropdownBtn?.addEventListener('click', (e) => {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      e.preventDefault();
+      dropdown.classList.toggle('is-open');
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.body.classList.remove('nav-open');
+      dropdown?.classList.remove('is-open');
+      burger?.setAttribute('aria-expanded', 'false');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+  });
+});
