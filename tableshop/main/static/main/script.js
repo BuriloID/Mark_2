@@ -372,10 +372,3 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMoreBtn.addEventListener('click', loadMoreMosaic);
   }
 });
-
-window.addEventListener("load", function () {
-  const loader = document.getElementById("page-loader");
-  if (loader) {
-    setTimeout(() => loader.classList.add("hidden"), 2000);
-  }
-});
