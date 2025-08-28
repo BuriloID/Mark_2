@@ -377,16 +377,6 @@ const nav = document.getElementById('main-nav');
 hamburger.addEventListener('change', () => {
     nav.classList.toggle('active', hamburger.checked);
 });
-document.querySelectorAll('.menu-dropdown > .dropdown-btn').forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.preventDefault();
-    const parent = btn.parentElement;
-    document.querySelectorAll('.menu-dropdown').forEach(drop => {
-      if (drop !== parent) drop.classList.remove('open');
-    });
-    parent.classList.toggle('open');
-  });
-});
 document.querySelectorAll('.dropdown-btn').forEach(btn => {
   btn.addEventListener('click', e => {
     if (window.matchMedia('(max-width: 800px)').matches) {
