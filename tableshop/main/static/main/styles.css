@@ -111,6 +111,9 @@
         background: #f2f2f2;
         color: #191b1e;
     }
+    .back-button {
+        display: none;
+    }
     .arrow {
       display: none;
       cursor: pointer;
@@ -328,6 +331,7 @@ z-index: 1001;
 .back-button {
   border-bottom: 1px solid #e0e0e0;
   flex-shrink: 0;
+  display: block;
 }
 .dropdown-content li a {
   padding: 16px 20px;
