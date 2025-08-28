@@ -387,30 +387,28 @@ document.querySelectorAll('.menu-dropdown > .dropdown-btn').forEach(btn => {
     parent.classList.toggle('open');
   });
 });
-document.addEventListener('DOMContentLoaded', () => {
-  const burger = document.querySelector('.burger-btn');
-  const dropdown = document.querySelector('.menu-dropdown');
-  const dropdownBtn = document.querySelector('.menu-dropdown .dropdown-btn');
-
-  burger?.addEventListener('click', () => {
-    const open = document.body.classList.toggle('nav-open');
-    burger.setAttribute('aria-expanded', String(open));
-    document.documentElement.style.overflow = open ? 'hidden' : '';
-    document.body.style.overflow = open ? 'hidden' : '';
-  });
-  dropdownBtn?.addEventListener('click', (e) => {
-    if (window.matchMedia('(max-width: 768px)').matches) {
+document.querySelectorAll('.dropdown-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    if (window.matchMedia('(max-width: 800px)').matches) {
       e.preventDefault();
-      dropdown.classList.toggle('is-open');
+      nav.classList.add('submenu-open');
     }
   });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.body.classList.remove('nav-open');
-      dropdown?.classList.remove('is-open');
-      burger?.setAttribute('aria-expanded', 'false');
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-    }
+});
+document.querySelectorAll('.back-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    nav.classList.remove('submenu-open');
   });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    nav.classList.remove('active', 'submenu-open');
+    hamburger.checked = false;
+  }
+});
+hamburger.addEventListener('change', () => {
+  const isOpen = hamburger.checked;
+  nav.classList.toggle('active', isOpen);
+  nav.classList.remove('submenu-open');
 });
