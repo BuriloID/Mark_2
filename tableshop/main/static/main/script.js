@@ -417,3 +417,6 @@ hamburger.addEventListener('change', () => {
   nav.classList.toggle('active', isOpen);
   nav.classList.remove('submenu-open');
 });
+window.addEventListener("load", function() {
+    document.getElementById("preloader").classList.add("fade-out");
+  });
