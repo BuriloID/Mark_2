@@ -4,6 +4,21 @@ const slides = document.getElementsByClassName('slide');
 const dotsContainer = document.getElementById('slider-dots');
 const slider = document.querySelector('.slider');
 
+let startX = 0;
+let endX = 0;
+
+slider.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+slider.addEventListener("touchend", (e) => {
+  endX = e.changedTouches[0].clientX;
+  if (startX > endX + 50) {
+    plusSlide(1);
+  } else if (startX < endX - 50) {
+    plusSlide(-1);
+  }
+});
+
 function copyPhone() {
     const phone = '+7 (916) 715-99-55';
     navigator.clipboard.writeText(phone).then(() => {
