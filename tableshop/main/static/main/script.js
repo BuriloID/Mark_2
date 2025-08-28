@@ -7,16 +7,35 @@ const slider = document.querySelector('.slider');
 let startX = 0;
 let endX = 0;
 
-slider.addEventListener("touchstart", (e) => {
-  startX = e.touches[0].clientX;
+document.addEventListener("DOMContentLoaded", function() {
+    function hidePreloader() {
+        const preloader = document.getElementById("preloader");
+        if (preloader) {
+            preloader.classList.add("fade-out");
+            document.body.classList.add('loaded');
+        }
+    }
+    window.addEventListener("load", hidePreloader);
+    setTimeout(hidePreloader, 2000);
 });
-slider.addEventListener("touchend", (e) => {
-  endX = e.changedTouches[0].clientX;
-  if (startX > endX + 50) {
-    plusSlide(1);
-  } else if (startX < endX - 50) {
-    plusSlide(-1);
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  const slider = document.querySelector('.slider');
+  if (!slider) return;  // если элемента нет — выходим
+
+  let startX, endX;
+
+  // слушаем начало тача
+  slider.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+  slider.addEventListener('touchend', (e) => {
+    endX = e.changedTouches[0].clientX;
+    if (startX > endX + 50) {
+      plusSlide(1);
+    } else if (startX < endX - 50) {
+      plusSlide(-1);
+    }
+  });
 });
 
 function copyPhone() {
@@ -417,6 +436,3 @@ hamburger.addEventListener('change', () => {
   nav.classList.toggle('active', isOpen);
   nav.classList.remove('submenu-open');
 });
-window.addEventListener("load", function() {
-    document.getElementById("preloader").classList.add("fade-out");
-  });
