@@ -117,7 +117,7 @@ main {
     .back-button {
         display: none;
     }
-    .arrow {
+    /* .arrow {
       display: none;
       cursor: pointer;
       position: absolute;;
@@ -165,7 +165,7 @@ main {
     .arrow:hover .arrow-bottom:after {
       right: 0;
       transition-delay: 0s;
-    }
+    } */
     
 .hamburger {
   display: none;
@@ -1116,14 +1116,17 @@ z-index: 1001;
     margin-left: 12px;
     margin-bottom: 24px;
     letter-spacing: -0.02em;
-    color: #222;
+    font-family:'Open Sans', serif ;
+    color: #777777;
 }
 .contacts-data-grid {
     display: flex;
+    font-family:'Open Sans', serif ;
+    color: #777777;
     max-width: 1200px;
-    margin: 32px 0 0 48px; /* отступ слева 48px */
+    margin: 32px 0 0 48px; 
     gap: 120px;
-    justify-content: flex-start; /* по левому краю */
+    justify-content: flex-start; 
     align-items: flex-start;
     font-size: 1.13em;
 }
@@ -1133,7 +1136,7 @@ z-index: 1001;
 }
 
 .contacts-phone {
-    color: inherit; /* убирает зелёный цвет */
+    color: inherit; 
     font-weight: normal;
     text-decoration: none;
 }
