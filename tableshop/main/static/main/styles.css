@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+main {
+    padding-top: 60px; 
+}
     header {
         background: #f2f1f1;
         color: #fff;
@@ -1332,36 +1335,46 @@ z-index: 1001;
   background: #fff;
   border-bottom: 1px solid #eee;
   position: sticky;
-  top: 0;
+  top: 72px;
   z-index: 10;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.kitchen-nav::-webkit-scrollbar {
+  display: none;
 }
 .kitchen-nav ul {
   margin: 0;
-  padding: 0;
+  padding: 0 16px;
   list-style: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: max-content;
 }
 .kitchen-nav li {
-  margin: 0 34px;
+  margin: 0 20px;
   padding: 0;
   display: flex;
   align-items: center;
   height: 48px;
   position: relative;
+  flex-shrink: 0;
 }
 .kitchen-nav a {
+  font-family: 'Open Sans', serif;
+  color: #777777;
   display: inline-block;
   padding: 0 8px;
-  color: #181818;
   text-decoration: none;
-  font-size: 22px;
+  font-size: 18px;
   font-family: inherit;
   font-weight: 400;
   line-height: 48px;
   position: relative;
   transition: color 0.18s, font-weight 0.18s;
+  white-space: nowrap;
 }.kitchen-nav a:hover,
 .kitchen-nav li.active a:hover,
 .kitchen-nav a.active:hover {
@@ -1399,16 +1412,39 @@ z-index: 1001;
   transform: scaleX(0.6);
   transition: opacity 0.18s, transform 0.18s;
 }
-
 .kitchen-nav li:not(.active) a:hover::after,
 .kitchen-nav a:not(.active):hover::after {
   opacity: 1;
   transform: scaleX(1);
 }
-
-@media (max-width: 900px) {
-  .kitchen-nav li { margin: 0 10px; }
-  .kitchen-nav a { font-size: 17px; }
+@media (max-width: 1024px) {
+  .kitchen-nav ul {
+    justify-content: flex-start;
+  }  
+  .kitchen-nav li {
+    margin: 0 15px;
+  }
+}
+@media (max-width: 768px) {
+  .kitchen-nav li {
+    margin: 0 12px;
+  }
+  
+  .kitchen-nav a {
+    font-size: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .kitchen-nav ul {
+    padding: 0 12px;
+  }  
+  .kitchen-nav li {
+    margin: 0 10px;
+  }  
+  .kitchen-nav a {
+    font-size: 15px;
+    padding: 0 6px;
+  }
 }
 .cat-hero {
   position: relative;
@@ -1451,21 +1487,18 @@ z-index: 1001;
   text-shadow: 0 3px 18px rgba(0,0,0,0.28), 0 1.5px 6px rgba(0,0,0,0.20);
   z-index: 2;
 }
-
 .cat-hero-content h1 {
   font-size: 48px;
   margin: 0 0 17px 0;
   font-weight: 500;
   letter-spacing: 1px;
 }
-
 .cat-hero-content p {
   font-size: 20px;
   margin: 0;
   font-weight: 300;
   letter-spacing: 0.2px;
 }
-
 @media (max-width: 900px) {
   .cat-hero, .cat-hero-bg { min-height: 200px; height: 200px;}
   .cat-hero-content h1 { font-size: 26px; }
@@ -1474,14 +1507,12 @@ z-index: 1001;
 .kitchen-list-section {
     margin-top: 40px;
 }
-
 .kitchen-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
     gap: 48px 48px;
     justify-items: center;
 }
-
 .kitchen-card {
     width: 520px;
     padding-bottom: 18px;
@@ -1492,7 +1523,6 @@ z-index: 1001;
     background: none;
     box-shadow: none;
 }
-
 .kitchen-card-image-wrapper {
     width: 100%;
     display: flex;
@@ -1503,7 +1533,6 @@ z-index: 1001;
     box-shadow: 0 2px 16px rgba(0,0,0,0.04);
     overflow: hidden;
 }
-
 .kitchen-card-image-link {
     display: block;
     width: 100%;
