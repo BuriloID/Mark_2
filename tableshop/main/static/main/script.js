@@ -200,10 +200,21 @@ document.addEventListener('DOMContentLoaded', function() {
     callbackForm.onsubmit = function(event) {
       event.preventDefault();
       const formData = new FormData(callbackForm);
-
+      const agreementCheckbox = document.getElementById('cbx');
+          if (!agreementCheckbox.checked) {
+            alert('Пожалуйста, подтвердите согласие на обработку персональных данных');
+            return;
+          }
+    const submitBtn = callbackForm.querySelector('.call-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Отправка...';
+    submitBtn.disabled = true;
       fetch('/send_callback_to_telegram/', {
         method: 'POST',
         body: formData,
+        headers: {
+        'X-CSRFToken': getCSRFToken(), 
+        }
       })
       .then(resp => resp.json())
       .then(data => {
@@ -217,9 +228,20 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .catch(() => {
         alert('Ошибка соединения. Попробуйте ещё раз.');
-      });
+      })
+      .finally(() => {  
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+      }); 
     };
   }
+  function getCSRFToken() {
+  const cookieValue = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('csrftoken='))
+    ?.split('=')[1];
+  return cookieValue;
+}
 });
 function showKitchenImg(idx, kitchenImages, mainImg) {
     if (!kitchenImages.length) return;
@@ -249,10 +271,18 @@ let popupTimeout = setTimeout(() => {
 }, 45000);
 function openPopup() {
   document.getElementById('callback-popup').style.display = 'flex';
+  const fabButton = document.getElementById('popupCallBtn');
+    if (fabButton) {
+        fabButton.style.display = 'none';
+    }
   clearTimeout(popupTimeout); 
 }
 function closePopup() {
   document.getElementById('callback-popup').style.display = 'none';
+  const fabButton = document.getElementById('popupCallBtn');
+    if (fabButton) {
+        fabButton.style.display = 'flex';
+    }
   clearTimeout(popupTimeout);
 }
 document.querySelectorAll('#facades-filter-form input[type=radio]').forEach((el) => {
