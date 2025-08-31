@@ -2098,8 +2098,9 @@ z-index: 1001;
 }
 @media (max-width: 768px) {
   .facades-grid {
+    display: grid;
     justify-items: center;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     margin: 20px 0 0px 0;
   }
   .facade-card {
@@ -2131,7 +2132,7 @@ z-index: 1001;
 }
 @media (max-width: 360px) {
   .facades-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }  
   .facade-card {
     max-width: 280px;
