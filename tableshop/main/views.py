@@ -106,7 +106,7 @@ def facades(request):
     types = Facade.objects.values_list('type', flat=True).distinct()
     selected_type = request.GET.get('type')
     if selected_type and selected_type != 'all':
-        facades = Facade.objects.filter(type=selected_type)
+        facades = Facade.objects.filter(type=selected_type).order_by('id')
     else:
         facades = Facade.objects.all()
     return render(request, 'main/facades.html', {
