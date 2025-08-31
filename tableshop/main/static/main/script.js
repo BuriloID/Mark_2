@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
 function copyPhone() {
     const phone = '+7 (916) 715-99-55';
     navigator.clipboard.writeText(phone).then(() => {
@@ -466,3 +465,32 @@ hamburger.addEventListener('change', () => {
   nav.classList.toggle('active', isOpen);
   nav.classList.remove('submenu-open');
 });
+setTimeout(function() {
+    const filterToggle = document.getElementById('filterToggle');
+    const facadesFilter = document.getElementById('facadesFilter');    
+    if (filterToggle && facadesFilter) {
+        console.log('Filter toggle elements found');        
+        filterToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('Filter toggle clicked'); 
+            facadesFilter.classList.toggle('active'); 
+            filterToggle.classList.toggle('active');
+        });
+        document.addEventListener('click', function(e) {
+            if (!facadesFilter.contains(e.target) && 
+                !filterToggle.contains(e.target) && 
+                facadesFilter.classList.contains('active')) { 
+                facadesFilter.classList.remove('active'); 
+                filterToggle.classList.remove('active');
+            }
+        });
+        facadesFilter.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    } else {
+        console.log('Filter elements not found:', {
+            filterToggle: !!filterToggle,
+            facadesFilter: !!facadesFilter
+        });
+    }
+}, 1000);

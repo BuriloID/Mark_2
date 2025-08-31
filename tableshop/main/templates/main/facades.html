@@ -24,23 +24,27 @@
   </section>
 
   <div class="facades-page">
-  <aside class="facades-filter">
-    <form method="get" id="facades-filter-form">
-      <div class="filter-block">
-        <div class="filter-title">Вид массива</div>
+    <button class="filter-toggle" id="filterToggle">
+    Фильтры
+    <i class="fas fa-filter"></i>
+    </button>
+    <aside class="facades-filter" id="facadesFilter">
+  <form method="get" id="facades-filter-form">
+    <div class="filter-block">
+      <div class="filter-title">Вид массива</div>
+      <label class="filter-radio">
+        <input type="radio" name="type" value="all" class="input" {% if not selected_type or selected_type == "all" %}checked{% endif %}>
+        <span>Все</span>
+      </label>
+      {% for t in types %}
         <label class="filter-radio">
-          <input type="radio" name="type" value="all" {% if not selected_type or selected_type == "all" %}checked{% endif %}>
-          <span>Все</span>
+          <input type="radio" name="type" value="{{ t }}" class="input" {% if selected_type == t %}checked{% endif %}>
+          <span>{{ t }}</span>
         </label>
-        {% for t in types %}
-          <label class="filter-radio">
-            <input type="radio" name="type" value="{{ t }}" {% if selected_type == t %}checked{% endif %}>
-            <span>{{ t }}</span>
-          </label>
-        {% endfor %}
-      </div>
-      </form>
-    </aside>
+      {% endfor %}
+    </div>
+  </form>
+</aside>
     <section class="facades-list">
       <div class="facades-grid">
         {% for facade in facades %}
