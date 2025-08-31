@@ -2140,7 +2140,6 @@ z-index: 1001;
   align-items: flex-start;
   gap: 32px;
 }
-
 .facades-filter {
   position: sticky;
   top: 116px;
@@ -2299,7 +2298,6 @@ z-index: 1001;
   .facades-page {
     gap: 16px;
   }
-
   .facades-filter {
     min-width: 180px;
     max-width: 200px;
@@ -2310,7 +2308,6 @@ z-index: 1001;
     gap: 20px;
   }
 }
-
 @media (max-width: 768px) {
   .facades-page {
     flex-direction: column;
