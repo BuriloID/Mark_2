@@ -2143,6 +2143,8 @@ z-index: 1001;
   }
 }
 .facade-detail-card {
+  font-family: 'Open Sans', serif;
+  color: #777777;
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 2px 24px #0002;
@@ -2150,13 +2152,11 @@ z-index: 1001;
   margin: 32px 32px;
   max-width: 1800px;
 }
-
 .facade-detail-flex {
   display: flex;
   gap: 20px;
   align-items: flex-start;
 }
-
 .facade-detail-img-col {
   flex: 0 0 500px;
   display: flex;
@@ -2170,7 +2170,6 @@ z-index: 1001;
   box-shadow: 0 1px 8px #0001;
   margin-bottom: 0;
 }
-
 .facade-detail-content {
    flex: 1;
   max-width: 900px;
@@ -2180,16 +2179,95 @@ z-index: 1001;
   margin-top: 18px;
   margin-left: 64px;
 }
-
 .facade-detail-title {
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 30px;
 }
-
 .facade-detail-info {
   font-size: 18px;
   margin-bottom: 40px;
+}
+@media (max-width: 1024px) {
+    .facade-detail-card {
+        margin: 24px;
+        padding: 28px 28px 40px 28px;
+    }
+    .facade-detail-img-col {
+        flex: 0 0 400px;
+    }
+    .facade-detail-img {
+        width: 100%;
+    }
+    .facade-detail-content {
+        margin-left: 40px;
+    }
+}
+@media (max-width: 768px) {
+    .facade-detail-card {
+        margin: 16px;
+        padding: 24px 20px 36px 20px;
+        border-radius: 14px;
+    }
+    .facade-detail-flex {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .facade-detail-img-col {
+        flex: 1;
+        width: 100%;
+    }
+    .facade-detail-content {
+        margin-left: 0;
+        margin-top: 0;
+    }
+    .facade-detail-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .facade-detail-info {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+    .product-calc-btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+        align-self: center;
+        text-align: center;
+    }
+}
+@media (max-width: 480px) {
+    .facade-detail-card {
+        margin: 12px;
+        padding: 20px 16px 30px 16px;
+        border-radius: 12px;
+    }
+    .facade-detail-title {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+    .facade-detail-info {
+        font-size: 15px;
+        margin-bottom: 24px;
+    }
+    .product-calc-btn {
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+@media (max-width: 360px) {
+    .facade-detail-card {
+        margin: 8px;
+        padding: 16px 12px 24px 12px;
+    }
+    .facade-detail-title {
+        font-size: 18px;
+    }
+    .facade-detail-info {
+        font-size: 14px;
+    }
 }
 .facades-page {
   display: flex;
