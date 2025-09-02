@@ -1885,6 +1885,9 @@ z-index: 1001;
     }
 }
 @media (max-width: 768px) {
+    .img-nav-btn {
+        display: none !important;
+    }
     .product-detail-infoblock {
         min-width: auto;
         width: 100%;
