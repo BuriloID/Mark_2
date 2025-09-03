@@ -159,7 +159,11 @@ function copyPhone() {
         console.error('Не удалось скопировать телефон: ', err);
     });
 }
-
+// Открытие инфо блока 
+function toggleAboutMpv() {
+    const accordion = document.querySelector('.about-mpv-accordion');
+    accordion.classList.toggle('active');
+}
 function hidePreloader() {
     const preloader = document.getElementById("preloader");
     if (preloader) {

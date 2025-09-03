@@ -2611,68 +2611,145 @@ z-index: 1001;
     font-size: 0.98em;
   }
 }
-.about-mpv-section {
-  background: #f7fafc;
-  padding: 38px 0 30px 0;
-  border-radius: 14px;
-  margin-bottom: 38px;
-  box-shadow: 0 2px 16px rgba(44, 62, 80, 0.06);
+.about-mpv-accordion {
+    margin: 40px 0;
+    border-radius: 12px;
+    overflow: hidden;
 }
-
+.about-mpv-toggle.cta {
+    position: relative;
+    padding: 20px 25px;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+}
+.about-mpv-toggle.cta:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    display: block;
+    border-radius: 50px;
+    background: #f3c77f;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+    z-index: 0;
+}
+.about-mpv-toggle.cta span {
+    position: relative;
+    font-family: "Open Sans", sans-serif; 
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: black;
+    z-index: 1;
+    padding-left: 10px;
+}
+.about-mpv-toggle.cta svg {
+    position: relative;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: black;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+    z-index: 1;
+    flex-shrink: 0;
+}
+@media (hover: hover) {
+    .about-mpv-toggle.cta:hover:before {
+        width: calc(100% - 30px);
+        background: #f3c77f;
+    }
+    .about-mpv-toggle.cta:hover svg {
+        transform: translateX(0);
+    }
+}
+.about-mpv-accordion.active .about-mpv-toggle.cta:before {
+    width: calc(100% - 30px) !important;
+    background: #f3c77f !important;
+}
+.about-mpv-accordion.active .about-mpv-toggle.cta svg {
+    transform: rotate(90deg) translateX(0) !important;
+}
+.about-mpv-toggle.cta:active {
+    transform: scale(0.98);
+}
+.about-mpv-content-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
 .about-mpv-content {
-  max-width: 90%;
-  margin: 0 auto;
-  padding: 0 20px;
-  font-size: 1.15em;
-  color: #2e2e2e;
-  line-height: 1.7;
+    padding: 25px;
+    line-height: 1.6;
+    color: #555;
+    background: white;
+    border-radius: 0 0 12px 12px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    font-family: "Open Sans", sans-serif; 
+    text-align: justify;
 }
-
-.about-mpv-content b {
-  color: #000000;
-  font-weight: 700;
-}
-
 .about-mpv-link {
-  color: #000000;
-  text-decoration: underline;
-  font-weight: 500;
-  transition: color 0.2s;
+    color: black;
+    text-decoration: none;
+    font-family: "Open Sans", sans-serif; 
+    font-weight: 600;
 }
 .about-mpv-link:hover {
-  color: #000000;
-  text-decoration: none;
+    text-decoration: underline;
 }
-
-@media (max-width: 700px) {
-  .about-mpv-content {
-    font-size: 1em;
-    padding: 0 8px;
-  }
-  .about-mpv-section {
-    padding: 22px 0 18px 0;
-    border-radius: 8px;
-  }
+.about-mpv-accordion.active .about-mpv-content-wrapper {
+    max-height: 1000px;
+}
+@media (max-width: 768px) {
+    .about-mpv-toggle.cta {
+        padding: 16px 20px;
+    } 
+    .about-mpv-toggle.cta span {
+        font-size: 16px;
+    } 
+    .about-mpv-toggle.cta:before {
+        width: 35px;
+        height: 35px;
+        left: 10px;
+    }
+    .about-mpv-content {
+        padding: 20px;
+        font-size: 14px;
+        text-align: justify;
+    }
 }
 .partners-section {
+  font-family: 'Open Sans', serif;
+  font-weight: 700;
+  color: #606060;
   padding: 40px 20px;
   background-color: #f9f9f9;
   text-align: center;
 }
-
 .partners-section h2 {
   margin-bottom: 30px;
   font-size: 28px;
   font-weight: 600;
 }
-
 .partners-logos {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
 }
-
 .partners-logos img {
   width: 140px;
   height: 60px;
@@ -2680,7 +2757,6 @@ z-index: 1001;
   filter: grayscale(100%);
   transition: filter 0.3s ease, transform 0.3s ease;
 }
-
 .partners-logos img:hover {
   filter: grayscale(0%);
   transform: scale(1.05);
