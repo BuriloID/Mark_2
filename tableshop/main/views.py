@@ -6,7 +6,7 @@ from django.http import JsonResponse
 
 
 
-TELEGRAM_TOKEN = '7632758284:AAGa3qFxnukMyHD194Ypduis0a2d8rHfcqw'
+TELEGRAM_TOKEN = '7792957968:AAGNZ-YBFhyvU-Ws3ruLj9K3iw5ZD1CHZLg'
 TELEGRAM_CHAT_ID = '5208308918'  
 @csrf_exempt
 def send_to_telegram(request):
