@@ -164,6 +164,10 @@ function toggleAboutMpv() {
     const accordion = document.querySelector('.about-mpv-accordion');
     accordion.classList.toggle('active');
 }
+function toggleProduction() {
+    const accordion = document.querySelector('.production-accordion');
+    accordion.classList.toggle('active');
+}
 function hidePreloader() {
     const preloader = document.getElementById("preloader");
     if (preloader) {
@@ -509,49 +513,86 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Мозаика изображений
-    const mosaicContainer = document.getElementById('mosaic');
-    const loadMoreBtn = document.querySelector('.load-more');
-    
-    if (mosaicContainer && loadMoreBtn) {
-        let allImages = [];
-        let loadedCount = 0;
-        const perLoad = 12;
-        
-        fetch('/api/gallery_craft_images/')
-            .then(res => res.json())
-            .then(data => {
-                allImages = data.images;
-                loadMoreMosaic();
-            })
-            .catch(console.error);
-        
-        function loadMoreMosaic() {
-            const nextImages = allImages.slice(loadedCount, loadedCount + perLoad);
-            
-            nextImages.forEach(src => {
-                const img = document.createElement('img');
-                img.src = src;
-                img.className = 'mosaic-item';
-                img.loading = 'lazy';
-                
-                img.addEventListener('load', () => {
-                    img.classList.add('loaded');
-                });
-                
-                mosaicContainer.appendChild(img);
-            });
-            
-            loadedCount += nextImages.length;
-            
-            if (loadedCount >= allImages.length) {
-                loadMoreBtn.style.display = 'none';
-            }
+// Мозаика изображений
+const mosaicContainer = document.getElementById('mosaic');
+const loadMoreBtn = document.querySelector('.load-more');
+if (mosaicContainer && loadMoreBtn) {
+    let allImages = [];
+    let loadedCount = 0;
+    const perLoad = 12;
+    // Создаем модальное окно
+    createImageModal();
+    fetch('/api/gallery_craft_images/')
+        .then(res => res.json())
+        .then(data => {
+            allImages = data.images;
+            loadMoreMosaic();
+        })
+        .catch(console.error);
+    function loadMoreMosaic() {
+        const nextImages = allImages.slice(loadedCount, loadedCount + perLoad);
+        nextImages.forEach((src, index) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.className = 'mosaic-item';
+            img.loading = 'lazy';
+            img.alt = `Изображение ${loadedCount + index + 1}`; 
+            // Добавляем обработчик клика
+            img.addEventListener('click', () => {
+                openImageModal(src, loadedCount + index);
+            }); 
+            img.addEventListener('load', () => {
+                img.classList.add('loaded');
+            });  
+            mosaicContainer.appendChild(img);
+        });
+        loadedCount += nextImages.length;
+        if (loadedCount >= allImages.length) {
+            loadMoreBtn.style.display = 'none';
         }
-        
-        loadMoreBtn.addEventListener('click', loadMoreMosaic);
     }
-    
+    function createImageModal() {
+        const modalHTML = `
+            <div id="imageModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9);">
+                <span class="modal-close" style="position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer;">&times;</span>
+                <img class="modal-content" id="modalImage" style="margin: auto; display: block; max-width: 90%; max-height: 80%; margin-top: 60px;">
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        // Обработчики для модального окна
+        const modal = document.getElementById('imageModal');
+        const closeBtn = modal.querySelector('.modal-close');
+         closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        // Закрытие по ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+            }
+        });
+    }
+    function openImageModal(src, index) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');    
+        modalImg.src = src;
+        modalImg.alt = `Изображение ${index + 1}`;
+        modal.style.display = 'block';      
+        // Блокируем прокрутку body
+        document.body.style.overflow = 'hidden';
+    } 
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = 'none';
+        
+        // Восстанавливаем прокрутку body
+        document.body.style.overflow = 'auto';
+    }
+    loadMoreBtn.addEventListener('click', loadMoreMosaic);
+}
     // Навигационное меню
     const hamburger = document.querySelector('.hamburger input');
     const nav = document.getElementById('main-nav');
