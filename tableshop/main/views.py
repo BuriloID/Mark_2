@@ -1,6 +1,6 @@
 import requests
 from django.shortcuts import render, get_object_or_404
-from .models import Kitchen, Garder, Facade, Bath
+from .models import Kitchen, Garder, Facade, Bath #Door
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
@@ -67,6 +67,11 @@ def index(request):
     return render(request, "main/index.html")
 def contacts(request):
     return render(request, "main/contacts.html")
+def door(request):
+    #doors = Door.objects.all()
+    return render(request, "main/door.html") #, {'doors': doors})
+def ready_products(request):
+    return render(request, "main/ready_products.html")
 def kitchen(request):
     kitchens = Kitchen.objects.all()
     return render(request, 'main/kitchen.html', {'kitchens': kitchens})
