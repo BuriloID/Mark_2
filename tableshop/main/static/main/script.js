@@ -176,6 +176,7 @@ function hidePreloader() {
     }
 }
 
+
 // Основной обработчик DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
     // Инициализация прелоадера

@@ -1292,6 +1292,7 @@ z-index: 1001;
   z-index: 10;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
   scrollbar-width: none;
 }
 .kitchen-nav::-webkit-scrollbar {
@@ -3192,7 +3193,6 @@ body.no-scroll {
   gap: 15px;
   margin: 60px 20px;
 }
-
 .about-main .about-block {
   font-family: 'Open Sans', serif;
   color: #777777;
@@ -3203,14 +3203,12 @@ body.no-scroll {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .about-main .about-block h2 {
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 15px;
   color: #777777;
 }
-
 .about-main .about-block p,
 .about-main .about-block ul {
   font-size: 1rem;
@@ -3218,17 +3216,14 @@ body.no-scroll {
   line-height: 1.6;
   color: #777777;
 }
-
 .about-main .about-block ul {
   list-style-type: disc;
   padding-left: 20px;
 }
-
 .about-main .about-block:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
-
 @media (max-width: 900px) {
   .about-main {
     flex-direction: column;
@@ -3239,7 +3234,6 @@ body.no-scroll {
   text-align: right;
   margin: 40px 20px 60px;
 }
-
 .privacy-btn {
   display: inline-block;
   padding: 12px 28px;
@@ -3251,7 +3245,6 @@ body.no-scroll {
   text-decoration: none;
   transition: background 0.3s ease, transform 0.2s ease;
 }
-
 .privacy-btn:hover {
   background: #444;
   transform: translateY(-2px);
