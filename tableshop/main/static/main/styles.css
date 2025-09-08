@@ -1292,7 +1292,6 @@ z-index: 1001;
   z-index: 10;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: none;
   scrollbar-width: none;
 }
 .kitchen-nav::-webkit-scrollbar {
@@ -1306,6 +1305,7 @@ z-index: 1001;
   justify-content: center;
   align-items: center;
   min-width: max-content;
+  overscroll-behavior-y: contain;
 }
 .kitchen-nav li {
   margin: 0 20px;
