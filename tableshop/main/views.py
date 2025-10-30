@@ -65,6 +65,8 @@ def send_callback_to_telegram(request):
     return JsonResponse({'ok': False, 'error': 'Only POST allowed'}, status=400)
 def index(request):
     return render(request, "main/index.html")
+def politic(request):
+    return render(request, "main/politic.html")
 def contacts(request):
     return render(request, "main/contacts.html")
 def door(request):
