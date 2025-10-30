@@ -20,7 +20,6 @@ import dj_database_url
 BASE_DIR   = Path(__file__).resolve().parent.parent
 dotenv_path = BASE_DIR / '.env'
 
-from dotenv import load_dotenv
 load_dotenv(override=True)
 
 
@@ -97,16 +96,32 @@ if os.getenv("DATABASE_URL"):
         "default": dj_database_url.config(conn_max_age=600, ssl_require=True)
     }
 else:
+    #DATABASES = {
+        #"default": {
+            #"ENGINE": "django.db.backends.postgresql",
+            #"NAME": "prfasad",
+            #"USER": "postgres",
+            #"PASSWORD": "12345678",
+            #"HOST": "localhost",
+            #"PORT": "5432",
+            #'OPTIONS': {
+            #'sslmode': 'require',   
+            #},
+        #}
+    #}
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "prfasad",
-            "USER": "postgres",
-            "PASSWORD": "12345678",
-            "HOST": "localhost",
-            "PORT": "5432",
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mpv_gbo6',
+        'USER': 'mpv_user',
+        'PASSWORD': 'RxMxY5aBTT3X9apF10zcX49CZd6Z2UAd',
+        'HOST': 'dpg-d40it5i4d50c73d7d37g-a.oregon-postgres.render.com',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
+}
 
 
 # Password validation
