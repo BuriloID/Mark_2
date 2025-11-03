@@ -30,7 +30,7 @@
         </svg>
         <h3>В избранном пока ничего нет</h3>
         <p>Добавляйте товары в избранное, чтобы не потерять их</p>
-        <a href="{% url 'facades' %}" class="btn-primary">Перейти к фасадам</a>
+        <a href="/" class="btn-home">Перейти на главную</a>
       </div>
     </div>
   </div>
@@ -41,6 +41,8 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
 }
 
 .favorites-header {
@@ -52,59 +54,63 @@
   font-size: 2.5rem;
   margin-bottom: 10px;
   color: #333;
+  font-weight: 600;
 }
 
 .favorites-subtitle {
   font-size: 1.1rem;
   color: #666;
+  font-weight: 400;
 }
 
 .favorites-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
   margin-bottom: 40px;
 }
 
+/* НОВЫЙ ДИЗАЙН КАРТОЧКИ */
 .favorite-card {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 2px solid #000; /* Черный контур */
+  border-radius: 0; /* Без скруглений - чистый квадрат */
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   position: relative;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .favorite-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .favorite-card-image {
   width: 100%;
-  height: 200px;
+  height: 250px;
   object-fit: cover;
+  display: block;
 }
 
 .favorite-card-content {
   padding: 20px;
+  border-top: 1px solid #eee;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .favorite-card-title {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.favorite-card-info {
   margin-bottom: 15px;
-}
-
-.favorite-card-info div {
-  margin-bottom: 5px;
-  font-size: 0.9rem;
-  color: #666;
+  color: #333;
+  text-align: center;
+  line-height: 1.4;
 }
 
 .favorite-card-actions {
@@ -112,34 +118,41 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  margin-top: auto;
 }
 
 .btn-primary {
-  background: #007bff;
+  background: #555;
   color: white;
   padding: 10px 20px;
-  border-radius: 6px;
+  border-radius: 0;
   text-decoration: none;
   font-weight: 500;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
   flex: 1;
   text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  border: 1px solid #555;
+  font-size: 0.9rem;
 }
 
 .btn-primary:hover {
-  background: #0056b3;
+  background: #333;
   color: white;
+  border-color: #333;
 }
 
 .btn-remove {
-  background: none;
+  background: white;
   border: 1px solid #dc3545;
   color: #dc3545;
   padding: 10px 15px;
-  border-radius: 6px;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 0.9rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
 }
 
 .btn-remove:hover {
@@ -147,10 +160,34 @@
   color: white;
 }
 
+/* Кнопка "Перейти на главную" */
+.btn-home {
+  background: #555;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 0;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  border: 2px solid #555;
+}
+
+.btn-home:hover {
+  background: #333;
+  color: white;
+  border-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 .empty-state {
   text-align: center;
   padding: 60px 20px;
   color: #666;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .empty-state svg {
@@ -162,17 +199,20 @@
   font-size: 1.5rem;
   margin-bottom: 10px;
   color: #333;
+  font-weight: 600;
 }
 
 .empty-state p {
   margin-bottom: 30px;
   font-size: 1.1rem;
+  color: #666;
+  font-weight: 400;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
   .favorites-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
   }
   
@@ -186,6 +226,21 @@
   
   .btn-primary, .btn-remove {
     width: 100%;
+  }
+  
+  .btn-home {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+  
+  .favorite-card-title {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .favorites-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
