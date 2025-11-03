@@ -59,6 +59,9 @@
               <img src="{{ facade.main_image }}" alt="{{ facade.title }}" class="facade-img">
               <div class="facade-title">{{ facade.title }}</div>
             </a>
+             <button class="favorite-card-btn" data-item-id="facade-{{ facade.id }}">
+              <i class="fas fa-heart"></i>
+            </button>
           </div>
         {% empty %}
           <p>Фасады пока не добавлены.</p>

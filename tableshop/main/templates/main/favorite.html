@@ -1,0 +1,307 @@
+{% extends "main/base.html" %}
+{% block title %}Избранное — MPV{% endblock %}
+
+{% block content %}
+<div class="contacts-hero">
+  <div class="contacts-breadcrumbs">
+    <a href="/" class="contacts-breadcrumbs-home">MPV</a>
+    <span class="contacts-breadcrumbs-sep">/</span>
+    <span>Избранное</span>
+  </div>
+</div>
+
+<div class="favorites-page">
+  <div class="favorites-header">
+    <h1>Избранное</h1>
+    <p class="favorites-subtitle">Здесь собраны товары, которые вам понравились</p>
+  </div>
+
+  <div class="favorites-content">
+    <!-- Состояние когда есть избранные товары -->
+    <div class="favorites-grid" id="favoritesGrid">
+      <!-- Товары будут добавляться через JavaScript -->
+    </div>
+
+    <!-- Состояние когда избранных товаров нет -->
+    <div class="favorites-empty" id="favoritesEmpty" style="display: none;">
+      <div class="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <h3>В избранном пока ничего нет</h3>
+        <p>Добавляйте товары в избранное, чтобы не потерять их</p>
+        <a href="{% url 'facades' %}" class="btn-primary">Перейти к фасадам</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.favorites-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.favorites-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.favorites-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.favorites-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.favorite-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.favorite-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.favorite-card-content {
+  padding: 20px;
+}
+
+.favorite-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.favorite-card-info {
+  margin-bottom: 15px;
+}
+
+.favorite-card-info div {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.favorite-card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+  color: white;
+}
+
+.btn-remove {
+  background: none;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-remove:hover {
+  background: #dc3545;
+  color: white;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.empty-state svg {
+  margin-bottom: 20px;
+  color: #ddd;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.empty-state p {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .favorites-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .favorites-page {
+    padding: 20px 15px;
+  }
+  
+  .favorite-card-actions {
+    flex-direction: column;
+  }
+  
+  .btn-primary, .btn-remove {
+    width: 100%;
+  }
+}
+</style>
+
+<script>
+// Базовый JavaScript для отображения избранного
+document.addEventListener('DOMContentLoaded', function() {
+  const favoritesGrid = document.getElementById('favoritesGrid');
+  const favoritesEmpty = document.getElementById('favoritesEmpty');
+  
+  // Функция для загрузки и отображения избранных товаров
+  function loadFavorites() {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    
+    if (favorites.length === 0) {
+      // Показываем состояние "пусто"
+      favoritesGrid.style.display = 'none';
+      favoritesEmpty.style.display = 'block';
+      return;
+    }
+    
+    // Очищаем сетку
+    favoritesGrid.innerHTML = '';
+    
+    // Для демонстрации - создаем карточки для каждого избранного товара
+    favorites.forEach(favoriteId => {
+      const card = createFavoriteCard(favoriteId);
+      favoritesGrid.appendChild(card);
+    });
+    
+    // Показываем сетку с товарами
+    favoritesGrid.style.display = 'grid';
+    favoritesEmpty.style.display = 'none';
+  }
+  
+  // Функция для создания карточки товара
+  function createFavoriteCard(productId) {
+    const card = document.createElement('div');
+    card.className = 'favorite-card';
+    card.dataset.productId = productId;
+    
+    // Временные данные для демонстрации
+    // В реальном приложении здесь будет запрос к API или данные из базы
+    const productData = getProductDataById(productId);
+    
+    card.innerHTML = `
+      <img src="${productData.image}" alt="${productData.title}" class="favorite-card-image">
+      <div class="favorite-card-content">
+        <h3 class="favorite-card-title">${productData.title}</h3>
+        <div class="favorite-card-info">
+          <div><b>Вид:</b> ${productData.type}</div>
+          <div><b>Рамка:</b> ${productData.frame}</div>
+          <div><b>Филёнка:</b> ${productData.panel}</div>
+        </div>
+        <div class="favorite-card-actions">
+          <a href="${productData.url}" class="btn-primary">Подробнее</a>
+          <button class="btn-remove" onclick="removeFromFavorites('${productId}')">Удалить</button>
+        </div>
+      </div>
+    `;
+    
+    return card;
+  }
+  
+  // Временная функция для демонстрации данных
+  // В реальном приложении нужно получать данные с сервера
+  function getProductDataById(productId) {
+    // Пример данных - в реальности нужно получать с бэкенда
+    const products = {
+      'facade-1': {
+        title: 'Фасад №1',
+        type: 'Рамочный',
+        frame: 'Алюминиевая',
+        panel: 'МДФ',
+        image: '/static/images/facade1.jpg',
+        url: '/facades/1/'
+      },
+      'facade-2': {
+        title: 'Фасад №2', 
+        type: 'Цельный',
+        frame: '-',
+        panel: 'Массив дерева',
+        image: '/static/images/facade2.jpg',
+        url: '/facades/2/'
+      }
+    };
+    
+    return products[productId] || {
+      title: productId,
+      type: 'Неизвестно',
+      frame: 'Неизвестно', 
+      panel: 'Неизвестно',
+      image: '/static/images/placeholder.jpg',
+      url: '#'
+    };
+  }
+  
+  // Функция для удаления из избранного
+  window.removeFromFavorites = function(productId) {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const index = favorites.indexOf(productId);
+    
+    if (index > -1) {
+      favorites.splice(index, 1);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      
+      // Перезагружаем список
+      loadFavorites();
+      
+      // Показываем уведомление
+      alert('Товар удален из избранного');
+    }
+  };
+  
+  // Инициализация
+  loadFavorites();
+});
+</script>
+{% endblock %}
