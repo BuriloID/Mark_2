@@ -230,46 +230,62 @@ function loadFavoritesPage() {
 // Основной обработчик DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll(".favorite-card-btn").forEach((btn) => {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const itemId = btn.dataset.itemId;
-      const itemTitle = btn.dataset.itemTitle;
-      const itemImage = btn.dataset.itemImage;
-      const itemUrl = btn.dataset.itemUrl;
-
-      let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-      const existing = favorites.find((f) => f.id === itemId);
-
-      if (existing) {
-        // Удаляем из избранного
-        favorites = favorites.filter((f) => f.id !== itemId);
-        btn.classList.remove("active");
-      } else {
-        // Добавляем
-        favorites.push({
-          id: itemId,
-          title: itemTitle,
-          image: itemImage,
-          url: itemUrl,
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            handleFavoriteToggle(this.dataset);
+            this.classList.toggle("active");
         });
-        btn.classList.add("active");
-      }
-
-      localStorage.setItem("favorites", JSON.stringify(favorites));
     });
-  });
+
+    // Обработчик для ЧЕКБОКСОВ (для страниц деталей товаров)
+    document.querySelectorAll(".favorite-checkbox").forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+            handleFavoriteToggle(this.dataset);
+        });
+    });
+
+    // Общая функция для переключения избранного
+    function handleFavoriteToggle(data) {
+        const itemId = data.itemId;
+        const itemTitle = data.itemTitle;
+        const itemImage = data.itemImage;
+        const itemUrl = data.itemUrl;
+
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        const existing = favorites.find((f) => f.id === itemId);
+
+        if (existing) {
+            // Удаляем из избранного
+            favorites = favorites.filter((f) => f.id !== itemId);
+        } else {
+            // Добавляем в избранное
+            favorites.push({
+                id: itemId,
+                title: itemTitle,
+                image: itemImage,
+                url: itemUrl,
+            });
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+
     // Загружаем страницу избранного если мы на ней
     if (document.getElementById("favoritesGrid")) {
         loadFavoritesPage();
     }
-  // Подсвечиваем сердечки, которые уже в избранном
-  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-  favorites.forEach((item) => {
-    const btn = document.querySelector(`[data-item-id="${item.id}"]`);
-    if (btn) btn.classList.add("active");
-  });
+
+    // Подсвечиваем элементы, которые уже в избранном
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    favorites.forEach((item) => {
+        // Для кнопок
+        const btn = document.querySelector(`.favorite-card-btn[data-item-id="${item.id}"]`);
+        if (btn) btn.classList.add("active");
+        
+        // Для чекбоксов
+        const checkbox = document.querySelector(`.favorite-checkbox[data-item-id="${item.id}"]`);
+        if (checkbox) checkbox.checked = true;
+    });
     // Инициализация прелоадера
     window.addEventListener("load", hidePreloader);
     setTimeout(hidePreloader, 2000);

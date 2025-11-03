@@ -32,6 +32,25 @@
     </div>
     <div class="product-detail-infoblock">
       <div class="product-detail-props">
+        <div class="facade-detail-header">
+        <div class="favorite-section-compact">
+          <input type="checkbox" id="favorite-{{ kitchen.id }}" name="favorite-checkbox" class="favorite-checkbox"
+          data-item-id="kitchen--{{ kitchen.id }}"
+           data-item-title="Кухня №{{ kitchen.title }}"
+           data-item-image="{{ kitchen.facade_image }}"
+           data-item-url="{% url 'kitchen_detail' kitchen.id %}"
+           >
+          <label for="favorite-{{ kitchen.id }}" class="favorite-container-compact">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <div class="action">
+              <span class="option-1">В избранное</span>
+              <span class="option-2">В избранном</span>
+            </div>
+          </label>
+        </div>
+        </div>
         <div><b>Вид фасада:</b> {{ kitchen.facade_type }}</div>
         <div><b>Покрытие фасадов:</b> {{ kitchen.facade_coating }}</div>
         <div><b>Размеры кухни:</b> {{ kitchen.size }}</div>
