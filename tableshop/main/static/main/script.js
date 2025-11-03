@@ -1,3 +1,5 @@
+
+
 // Универсальная функция проверки согласия
 function validateAgreement(checkboxId, errorElementId) {
     const agreementCheckbox = document.getElementById(checkboxId);
@@ -175,10 +177,99 @@ function hidePreloader() {
         document.body.classList.add('loaded');
     }
 }
+// функция избранного
+function loadFavoritesPage() {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const grid = document.getElementById("favoritesGrid");
+    const empty = document.getElementById("favoritesEmpty");
 
+    if (!grid || !empty) return; 
+
+    if (favorites.length === 0) {
+        empty.style.display = "block";
+        grid.style.display = "none";
+        return;
+    }
+
+    grid.style.display = "grid";
+    empty.style.display = "none";
+    grid.innerHTML = ""; 
+
+    favorites.forEach(item => {
+        const card = document.createElement("div");
+        card.classList.add("favorite-card");
+        card.innerHTML = `
+            <a href="${item.url}">
+                <img src="${item.image}" alt="${item.title}" class="favorite-card-image">
+            </a>
+            <div class="favorite-card-content">
+                <div class="favorite-card-title">${item.title}</div>
+                <div class="favorite-card-actions">
+                    <a href="${item.url}" class="btn-primary">Подробнее</a>
+                    <button class="btn-remove" data-id="${item.id}">Удалить</button>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    // Удаление карточек
+    grid.addEventListener("click", function (e) {
+        if (e.target.classList.contains("btn-remove")) {
+            const id = e.target.dataset.id;
+            let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            favorites = favorites.filter(f => f.id !== id);
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            
+            // Перезагружаем страницу
+            location.reload();
+        }
+    });
+}
 
 // Основной обработчик DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll(".favorite-card-btn").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const itemId = btn.dataset.itemId;
+      const itemTitle = btn.dataset.itemTitle;
+      const itemImage = btn.dataset.itemImage;
+      const itemUrl = btn.dataset.itemUrl;
+
+      let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+      const existing = favorites.find((f) => f.id === itemId);
+
+      if (existing) {
+        // Удаляем из избранного
+        favorites = favorites.filter((f) => f.id !== itemId);
+        btn.classList.remove("active");
+      } else {
+        // Добавляем
+        favorites.push({
+          id: itemId,
+          title: itemTitle,
+          image: itemImage,
+          url: itemUrl,
+        });
+        btn.classList.add("active");
+      }
+
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    });
+  });
+    // Загружаем страницу избранного если мы на ней
+    if (document.getElementById("favoritesGrid")) {
+        loadFavoritesPage();
+    }
+  // Подсвечиваем сердечки, которые уже в избранном
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  favorites.forEach((item) => {
+    const btn = document.querySelector(`[data-item-id="${item.id}"]`);
+    if (btn) btn.classList.add("active");
+  });
     // Инициализация прелоадера
     window.addEventListener("load", hidePreloader);
     setTimeout(hidePreloader, 2000);

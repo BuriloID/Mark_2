@@ -43,9 +43,13 @@
             {% endif %}
           </div>
           <div class="kitchen-title">№ {{ bath.title }}</div>
-          <button class="favorite-card-btn" data-item-id="facade-{{ facade.id }}">
-              <i class="fas fa-heart"></i>
-            </button>
+          <button class="favorite-card-btn"
+                data-item-id="bath-{{ bath.id }}"
+                data-item-title="Мебель для ванной комнаты №{{ bath.title }}"
+                data-item-image="{{ bath.main_image }}"
+                data-item-url="{% url 'bath_detail' bath.id %}">
+          <i class="fas fa-heart"></i>
+        </button>
         </div>
       {% endfor %}
     </div>

@@ -42,9 +42,13 @@
             {% endif %}
           </div>
           <div class="kitchen-title">№ {{ garder.title }}</div>
-          <button class="favorite-card-btn" data-item-id="facade-{{ facade.id }}">
-              <i class="fas fa-heart"></i>
-            </button>
+          <button class="favorite-card-btn"
+                data-item-id="garder-{{ garder.id }}"
+                data-item-title="Гардеробная №{{ garder.title }}"
+                data-item-image="{{ garder.main_image }}"
+                data-item-url="{% url 'garder_detail' garder.id %}">
+          <i class="fas fa-heart"></i>
+        </button>
         </div>
       {% endfor %}
     </div>
